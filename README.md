@@ -1,6 +1,6 @@
 # Optimizely Fullstack Javascript Example - By Jon D Jones 💥
 
-This project makes uses of NextJs, Optimizely Fullstack and the JS SDK.
+This project makes uses of NextJs, Optimizely Fullstack and the JS SDK.  I want to be able to make the viewer happy with watching
 
 ## Live Site URL & Status 👺
 

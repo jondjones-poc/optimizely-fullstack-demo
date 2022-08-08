@@ -17,4 +17,4 @@ const props = {...stylesheet, ...pageProps};
       </>)
 }
 
-export default MyApp
+export default MyApp;

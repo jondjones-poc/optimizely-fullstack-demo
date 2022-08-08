@@ -12,7 +12,7 @@ module.exports = {
    includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ['localhost', 'optimizely-fullstack-javascript.netlify.app'],
-    path: 'https://optimizely-fullstack-javascript.netlify.app/',
+    domains: ['localhost', 'optimizely-demo.netlify.app'],
+    path: 'https://optimizely-demo.netlify.app/',
   },
 }

@@ -23,6 +23,7 @@ export default function Home({...props}) {
   const router = useRouter()
 
   const optimizelyClient = createInstance({
+
     datafile: props?.datafile,
   });
 
@@ -109,7 +110,7 @@ export default function Home({...props}) {
 
                 <header>
                   <h2>
-                    Mult-arm Bandit Banner {postData.id}
+                    Multi-arm Bandit Banner {postData.id}
                   </h2>
                 </header>
 
