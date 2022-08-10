@@ -49,3 +49,8 @@ a {
   background-color: #04AA6D;
   color: white;
 }
+
+#feature-flag {
+  width: 100%;
+  overflow: hidden;
+}

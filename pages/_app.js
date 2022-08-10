@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
 const props = {...stylesheet, ...pageProps};
 
   return (<>
-            <TopHeader />
+            {/* <TopHeader /> */}
             <Layout {...props}>
 
                   <Component {...pageProps} />

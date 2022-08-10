@@ -3,18 +3,10 @@ import Link from "next/link";
 
 export default function TopHeader() {
 
-    const navLinks = [
-        { name: "Render Feature Flag Status",
-            path: "/"
-        },
-        { name: "Track Metrics",
-            path: "/metric"
-        },
-        {
-            name: "User Profile Example",
-            path: "/profile",
-        }
-    ];
+    const navLinks = [];
+        // { name: "Render Feature Flag Status",
+        //     path: "/"
+        // }
 
     return (
         <header>

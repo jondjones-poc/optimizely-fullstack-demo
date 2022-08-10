@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useRouter } from 'next/router'
 
-import ComponentA from "../component/Experimentation/ComponentA";
-import ComponentB from "../component/Experimentation/ComponentB";
+import ABComponent from "../component/ABComponent";
+import FeatureFlagComponent from "../component/FeatureFlagComponent";
 
 import {
   createInstance
@@ -17,7 +17,8 @@ const dataFileUrl = `https://cdn.optimizely.com/datafiles/${sdkKey}.json`;
 export default function Home({...props}) {
 
   const [ isFeatureEnabled, renderIsFeatureEnabled ] = useState(true);
-  const [ componentName, setComponentName ] = useState('');
+  const [ backgroundColor, setBackgroundColor ] = useState('');
+  const [ componentTitle, setComponentTitle ] = useState('');
   const [ postData, setPostData ] = useState({});
 
   const router = useRouter()
@@ -46,20 +47,26 @@ export default function Home({...props}) {
   useEffect(() => {
 
     optimizelyClient.onReady().then(() => {
-      const featureFlagTargetedDelivery = optimizelyUserContext.decide('feature_flag');
-      console.log('featureFlagTargetedDelivery', featureFlagTargetedDelivery.enabled);
 
-      setComponentName(featureFlagTargetedDelivery.variables.name);
-      renderIsFeatureEnabled(featureFlagTargetedDelivery.enabled);
+      // Feature flag code
+      const featureFlag = optimizelyUserContext.decide('feature_flag');
+      console.log('featureFlag', featureFlag.enabled);
+      renderIsFeatureEnabled(featureFlag.enabled);
 
-      const usersBucketedExperimentKey = optimizelyClient.activate('a_b_test_multi-armed_bandit', userId);
-      const api = optimizelyClient.getFeatureVariable('a_b_test', 'api_configuration', userId);
+      // AB Testing Code
+      const abTestData = optimizelyUserContext.decide('ab_test');
+      setBackgroundColor(abTestData.variables.backgroundcolour);
+      setComponentTitle(abTestData.variables.component_title);
+
+      /// Multi-arm bandit code
+      const apiDataJson = optimizelyClient.getFeatureVariable('multi-arm_bandit', 'api_data', userId);
+      const apiUrl = apiDataJson.url;
 
       const fetchData = async () => {
-        const response = await fetch(api.url);
+        const response = await fetch(apiUrl);
         const json = await response.json();
 
-        console.log('posts', api.url, json);
+        console.log('API Call', apiUrl, json);
         setPostData(json);
       }
 
@@ -89,43 +96,43 @@ export default function Home({...props}) {
           <header>
             <h2>
               <strong>
-                <a href="#">
-                  Component Name = {componentName}
-                </a>
+                  {"Feature Flag Example: " + isFeatureEnabled}
               </strong>
             </h2>
           </header>
         </div>
       </section>
 
-      {isFeatureEnabled ?
-        <ComponentA userId={userId} /> : <ComponentB />
+      {isFeatureEnabled &&
+        <FeatureFlagComponent userId={userId} optimizelyClient />
       }
 
       <section id="main">
-					<div className="container">
-						<div className="row">
+        <div className="container">
+          <header>
+            <h2>
+              <strong>
+              {"AB Test Example"}
+              </strong>
+            </h2>
+          </header>
 
-              <article className="box post" id="article">
+          <ABComponent userId={userId} optimizelyClient backgroundColor={backgroundColor} componentTitle={componentTitle} />
 
-                <header>
-                  <h2>
-                    Multi-arm Bandit Banner {postData.id}
-                  </h2>
-                </header>
+        </div>
+        <div className="container">
+              <header>
+                <h2>
+                  <strong>
+                  {"Multi-arm Bandit Example: " + postData.id}
+                  </strong>
+                </h2>
+              </header>
 
-                <a href="#" className="image featured" onClick={bannerClicked(postData.id)}>
-                  <img src={`./images/${postData.id}.png`} alt={postData.title} />
-                </a>
-
-                <p className="post-data">
-                  {postData.body}
-                </p>
-
-              </article>
-
-            </div>
-          </div>
+              <a href="#" className="image featured" onClick={bannerClicked(postData.id)}>
+                <img src={`./images/${postData.id}.png`} alt={postData.title} />
+              </a>
+        </div>
       </section>
     </>
   )
