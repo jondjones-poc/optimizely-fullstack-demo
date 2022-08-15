@@ -17,7 +17,7 @@ const dataFileUrl = `https://cdn.optimizely.com/datafiles/${sdkKey}.json`;
 export default function Home({...props}) {
 
   const [ isFeatureEnabled, renderIsFeatureEnabled ] = useState(true);
-  const [ backgroundColor, setBackgroundColor ] = useState('');
+  const [ backgroundColour, setBackgroundColor ] = useState('');
   const [ componentTitle, setComponentTitle ] = useState('');
   const [ postData, setPostData ] = useState({});
 
@@ -29,7 +29,7 @@ export default function Home({...props}) {
   });
 
   // Got user Id either via query-string, or, create a random one
-  const { id, location } = router.query
+  const { id } = router.query
   const userId = id || uuidv4();
 
   let optimizelyUserContext;
@@ -38,7 +38,7 @@ export default function Home({...props}) {
     optimizelyUserContext = optimizelyClient.createUserContext(
       userId,
       {
-        location: location || "london",
+        location: "london",
         deviceType: "ios"
       }
     );
@@ -55,7 +55,7 @@ export default function Home({...props}) {
 
       // AB Testing Code
       const abTestData = optimizelyUserContext.decide('ab_test');
-      setBackgroundColor(abTestData.variables.backgroundcolour);
+      setBackgroundColor(abTestData.variables.backgroundColour);
       setComponentTitle(abTestData.variables.component_title);
 
       /// Multi-arm bandit code
@@ -117,7 +117,7 @@ export default function Home({...props}) {
             </h2>
           </header>
 
-          <ABComponent userId={userId} optimizelyClient backgroundColor={backgroundColor} componentTitle={componentTitle} />
+          <ABComponent userId={userId} optimizelyClient backgroundColor={backgroundColour} componentTitle={componentTitle} />
 
         </div>
         <div className="container">

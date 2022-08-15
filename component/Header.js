@@ -5,7 +5,7 @@ const sectionStyle = {
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    height: '195px'
+    height: '900px'
   };
 
 
