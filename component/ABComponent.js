@@ -21,12 +21,16 @@ const titleStyle =  {
 
 const ABComponent = ({...props}) => {
 
+    const { backgroundColor } = props;
+    console.log("ABComponent", props);
+
     const addEvent = () => {
-        optimizelyClient.track('button_click', props.userId);
+        console.log("AB Component Event Example")
+        props.optimizelyClient.track('button_click', props.userId);
     }
 
     return (
-        <div className="container" id="component-a"  style={sectionStyle(props.backgroundColor)} onClick={addEvent} >
+        <div className="container" id="component-a"  style={sectionStyle(backgroundColor)} onClick={addEvent} >
             <h1 style={titleStyle}>
                 {props.componentTitle}
             </h1>

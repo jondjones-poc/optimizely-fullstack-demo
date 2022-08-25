@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 
 import ABComponent from "../component/ABComponent";
 import FeatureFlagComponent from "../component/FeatureFlagComponent";
+import MultiArmBanditComponent from "../component/MultiArmBanditComponent";
 
 import {
   createInstance
@@ -16,21 +17,21 @@ const dataFileUrl = `https://cdn.optimizely.com/datafiles/${sdkKey}.json`;
 
 export default function Home({...props}) {
 
-  const [ isFeatureEnabled, renderIsFeatureEnabled ] = useState(true);
-  const [ backgroundColour, setBackgroundColor ] = useState('');
-  const [ componentTitle, setComponentTitle ] = useState('');
-  const [ postData, setPostData ] = useState({});
+  let [ isFeatureEnabled, renderIsFeatureEnabled ] = useState(true);
+  let [ backgroundColor, setBackgroundColor ] = useState('');
+  let [ componentTitle, setComponentTitle ] = useState('');
+  let [ postData, setPostData ] = useState({});
 
   const router = useRouter()
 
   const optimizelyClient = createInstance({
-
     datafile: props?.datafile,
   });
 
   // Got user Id either via query-string, or, create a random one
   const { id } = router.query
   const userId = id || uuidv4();
+  console.log(`userId`, userId);
 
   let optimizelyUserContext;
 
@@ -50,13 +51,14 @@ export default function Home({...props}) {
 
       // Feature flag code
       const featureFlag = optimizelyUserContext.decide('feature_flag');
-      console.log('featureFlag', featureFlag.enabled);
+      console.log('featureFlag', featureFlag);
       renderIsFeatureEnabled(featureFlag.enabled);
 
       // AB Testing Code
-      const abTestData = optimizelyUserContext.decide('ab_test');
-      setBackgroundColor(abTestData.variables.backgroundColour);
-      setComponentTitle(abTestData.variables.component_title);
+      const abTestFlag = optimizelyUserContext.decide('ab_test');
+      console.log('abTest', abTestFlag);
+      setBackgroundColor(abTestFlag.variables.backgroundcolour);
+      setComponentTitle(abTestFlag.variables.component_title);
 
       /// Multi-arm bandit code
       const apiDataJson = optimizelyClient.getFeatureVariable('multi-arm_bandit', 'api_data', userId);
@@ -69,15 +71,9 @@ export default function Home({...props}) {
         console.log('API Call', apiUrl, json);
         setPostData(json);
       }
-
       fetchData().catch(console.error);
     });
   }, [optimizelyUserContext]);
-
-  const bannerClicked = (id) => {
-    optimizelyClient.track('banner_click', userId, {variation: id});
-    console.log(`Banner ${id} clicked`)
-  }
 
   return (
     <>
@@ -104,7 +100,7 @@ export default function Home({...props}) {
       </section>
 
       {isFeatureEnabled &&
-        <FeatureFlagComponent userId={userId} optimizelyClient />
+        <FeatureFlagComponent userId={userId} optimizelyClient={optimizelyClient} />
       }
 
       <section id="main">
@@ -117,22 +113,12 @@ export default function Home({...props}) {
             </h2>
           </header>
 
-          <ABComponent userId={userId} optimizelyClient backgroundColor={backgroundColour} componentTitle={componentTitle} />
+          <ABComponent key={`${componentTitle}${backgroundColor}`} userId={userId} optimizelyClient={optimizelyClient} backgroundColor={backgroundColor} componentTitle={componentTitle} />
 
         </div>
-        <div className="container">
-              <header>
-                <h2>
-                  <strong>
-                  {"Multi-arm Bandit Example: " + postData.id}
-                  </strong>
-                </h2>
-              </header>
 
-              <a href="#" className="image featured" onClick={bannerClicked(postData.id)}>
-                <img src={`./images/${postData.id}.png`} alt={postData.title} />
-              </a>
-        </div>
+        <MultiArmBanditComponent key={postData.id} userId={userId} optimizelyClient postId={postData.id} title={postData.title} />
+
       </section>
     </>
   )

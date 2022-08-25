@@ -1,11 +1,11 @@
 
 const sectionStyle = {
     width: '100%',
-    backgroundImage: `url(images/header.png)`,
+    backgroundImage: `url(images/${process.env.NEXT_PUBLIC_CLIENT}header.png)`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    height: '900px'
+    height: '350px'
   };
 
 

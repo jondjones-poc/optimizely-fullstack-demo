@@ -2,23 +2,24 @@ import React from 'react'
 
 const sectionStyle = {
     width: '100%',
-    backgroundImage: `url(images/feature.png)`,
+    backgroundImage: `url(images/${process.env.NEXT_PUBLIC_CLIENT}feature.png)`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
-    height: '50vh'
+    height: '425px'
   };
 
 const FeatureFlagComponent = ({...props}) => {
 
+    const { userId, optimizelyClient } = props;
+
     const addEvent = () => {
-        props.optimizelyClient.track('button_click', props.userId);
+        optimizelyClient?.track('button_click', userId);
     }
 
     return (
-        <div className="container" id="feature-flag">
+        <div className="container">
             <div id="feature-flag" onClick={addEvent} style={ sectionStyle }>
-
             </div>
         </div>
     )

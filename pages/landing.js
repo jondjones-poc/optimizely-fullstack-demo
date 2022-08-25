@@ -13,7 +13,9 @@ const dataFileUrl = `https://cdn.optimizely.com/datafiles/${sdkKey}.json`;
 
 export default function Landing({...props}) {
 
-  const [ displayBanner, renderPersonalisationBanner ] = useState(false);
+  const [ componentMessage, setComponentMessage ] = useState();
+  const [ enabled, setEnabled ] = useState(false);
+  const [ matchedSegment, setMatchedSegment ] = useState();
 
   const router = useRouter()
 
@@ -21,18 +23,19 @@ export default function Landing({...props}) {
     datafile: props?.datafile,
   });
 
-  const { user = '' } = router.query
+  const { segment = '' } = router.query
   const userId = uuidv4();
 
   let optimizelyUserContext;
 
-  console.log('user segment', user);
+  console.log('Segment', segment);
 
   optimizelyClient.onReady().then(() => {
     optimizelyUserContext = optimizelyClient.createUserContext(
       userId,
       {
-        user: user
+        segment: segment,
+        user: segment
       }
     );
   });
@@ -41,9 +44,12 @@ export default function Landing({...props}) {
         optimizelyClient.onReady().then(() => {
 
         const decision  = optimizelyUserContext.decide('personalisation');
-        console.log('matched on key', decision.ruleKey, decision);
+        console.log('personalisation-flag', decision);
 
-        renderPersonalisationBanner(decision.enabled);
+        const componentMessage = decision.variables.component_message;
+        setComponentMessage(componentMessage);
+        setEnabled(decision.enabled);
+        setMatchedSegment(decision.ruleKey);
         });
     }, [optimizelyUserContext, optimizelyClient]);
 
@@ -59,27 +65,31 @@ export default function Landing({...props}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section id="features">
-        <div className="container" id="feature-container">
-          <header>
-            <h2>
-              <strong>
-                  {"Display Personlisation: " + displayBanner}
-              </strong>
-            </h2>
-          </header>
-        </div>
-      </section>
+      {!enabled ?
+        <section id="features">
+          <div className="container" id="feature-container">
+            <header>
+              <h2>
+                <strong>
+                    Welcome generic user to this page
+                </strong>
+              </h2>
+              <img src={`images/welcome.jpg`} />
+            </header>
+          </div>
+          </section> : null
+      }
 
-      {displayBanner ?
+      {enabled ?
         <section id="main">
           <div className="container">
             <header>
               <h2>
                 <strong>
-                  Hello VIP User!
+                  {componentMessage} you matched on {matchedSegment}
                 </strong>
               </h2>
+                <img src={`images/${process.env.NEXT_PUBLIC_CLIENT}${segment}.jpg`} />
             </header>
           </div>
         </section> : null
