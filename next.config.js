@@ -13,6 +13,5 @@ module.exports = {
   },
   images: {
     domains: ['localhost', 'optimizely-demo.netlify.app'],
-    path: 'https://optimizely-demo.netlify.app/',
   },
 }

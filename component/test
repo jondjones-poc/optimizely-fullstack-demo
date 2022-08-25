@@ -1,0 +1,13 @@
+import Optimizely from 'optimizely'; 
+import datafile from './optimizelyDataFile'; 
+import { getUser } from 'user'; 
+import sdk from 'contentful-sdk'; 
+
+const optimizelyClient = new Optimizely({ datafile }); 
+const user = getUser(); 
+
+// we are using the id of the variation container from the JSON sample above
+// In a real world implementation the ID would be set dynamically through 
+
+e.g. a slug.const variationEntry = await sdk.getEntry('41nZggHEplcBOsrPXLOEU'); 
+const variation = optimizelyClient.activate( CTA_test variationEntry.experimentKey, user.userId ); // variation => 'variation' const ctaEntryId = variationEntry.meta[variation]; // ctaEntryId => '5IlB5PCsca3zZnzlVd7WvI'

@@ -4,12 +4,12 @@ import React from 'react';
 import Header from './Header'
 import Footer from './Footer';
 
-const Layout = ({children, ...props}) => {
+const Layout = ({children, clientId, ...props}) => {
 
     return (
         <>
             <Head>
-                <title>Optimizely Fullstack Javascript SDK Demo</title>
+                <title>Optimizely Fullstack Demo</title>
                 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600,600i" rel="stylesheet" />
                 <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
             </Head>
@@ -17,11 +17,11 @@ const Layout = ({children, ...props}) => {
             <style dangerouslySetInnerHTML={{ __html: props.stylesheet }} />
 
             <div id="page-wrapper">
-                <Header {...props} />
+                <Header clientId={clientId} />
                     <section id="main">
                         {children}
                     </section>
-                <Footer {...props} />
+                <Footer clientId={clientId} />
             </div>
 
             <script type="text/javascript" src="assets/js/jquery.min.js"></script>

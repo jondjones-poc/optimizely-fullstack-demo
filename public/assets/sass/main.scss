@@ -220,9 +220,9 @@
 /* Container */
 
 	.container {
-		margin: 0 auto;
+		margin: 2% auto;
 		max-width: 100%;
-		width: 70em;
+		width: 80%;
 
 		@include breakpoint('<=xlarge') {
 			width: 68em;
@@ -926,7 +926,6 @@
 		position: relative;
 		overflow: hidden;
 		background: #fff;
-		padding: 2em 0;
 	}
 
 /* Content */
@@ -974,7 +973,6 @@
 		overflow: hidden;
 		border-top: solid 2px #e5e5e5;
 		background: #f0f0f0;
-		padding: 6em 0 8em 0;
 
 		form {
 			input[type="text"],
@@ -1393,9 +1391,7 @@
 
 		/* Main */
 
-			#main {
-				padding: 2em 0;
-			}
+
 
 		/* Content */
 

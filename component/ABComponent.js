@@ -1,35 +1,46 @@
 import React from 'react'
+import styles from './ABComponent.module.css'
 
 const sectionStyle = (backgroundColor) => (
 {
         width: '100%',
-        backgroundColor : backgroundColor,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        height: '20vh'
+        width: '100%',
+        padding: '60px 0',
+        textAlign: 'center',
+        background: backgroundColor,
+        color: 'white',
+        padding: `60px 0`,
+        textAlign: `center`,
 });
 
 
-const titleStyle =  {
-    color: 'black',
-    margin: 'auto',
-    fontSize: '3rem',
-    textAlign: 'center',
-    paddingTop: '35px'
-};
-
 const ABComponent = ({...props}) => {
 
+    const { backgroundColor, bannerText } = props;
+
     const addEvent = () => {
-        optimizelyClient.track('button_click', props.userId);
+        console.log("AB Component Event Example")
+        props.optimizelyClient.track('button_click', props.userId);
     }
 
     return (
-        <div className="container" id="component-a"  style={sectionStyle(props.backgroundColor)} onClick={addEvent} >
-            <h1 style={titleStyle}>
+        <div className="header" id="component-a" style={sectionStyle(backgroundColor)} >
+
+            <h1 className={styles.titleHeading}>
                 {props.componentTitle}
             </h1>
+
+            <div className={styles.titleText}>
+                {bannerText} today!
+            </div>
+
+            <a className={styles.btnBgstroke} onClick={addEvent} >
+                Buy now
+            </a>
+
         </div>
     )
 }

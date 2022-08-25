@@ -17,12 +17,20 @@ First, run the development server:
 npm run dev
 ```
 
+Click this button to create a new Github repo, new Netlify project and deploy this example yourself
+
+[![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jondjones-poc/Fullstack-demo)
+
 ## Useful Documentation 📄
+
+**SDK**
 
 - [JavaScript (Browser) SDK](https://docs.developers.optimizely.com/full-stack/docs/javascript-sdk)
 
 - [JavaScript (Node) SDK](https://docs.developers.optimizely.com/full-stack/docs/javascript-node-sdk)
 
 - [@optimizely/optimizely-sdk](https://www.npmjs.com/package/@optimizely/optimizely-sdk)
+
+**Metrics**
 
 - [Total Value and Revenue Metrics](https://support.optimizely.com/hc/en-us/articles/4410289433229-Total-value-and-other-numeric-metrics)

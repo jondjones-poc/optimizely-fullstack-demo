@@ -1,19 +1,21 @@
 
 const sectionStyle = {
-    width: '100%',
-    backgroundImage: `url(images/footer.png)`,
-    backgroundPosition: 'center',
-    backgroundSize: 'fit',
+    display: 'block',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    height: '692px'
-  };
+    position: 'relative',
+    width: '100%',
+    height: '100%'
+};
 
+const imageStyle = {
+    width: '100%'
+};
 
-const Footer = () => {
+const Footer = ({clientId}) => {
+
     return (
-        <section id="footer" style={ sectionStyle }>
-
+        <section id="footer" style={sectionStyle}>
+            <img src={`images/${clientId}/footer.png`} style={imageStyle} alt="Footer" />
         </section>
     )
 }
