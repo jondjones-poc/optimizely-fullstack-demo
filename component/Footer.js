@@ -17,7 +17,7 @@ const Footer = ({clientId}) => {
         <section id="footer" style={sectionStyle}>
             <img src={`images/${clientId}/footer.png`} style={imageStyle} alt="Footer" />
         </section>
-    )
+    );
 }
 
-export default Footer
+export default Footer;

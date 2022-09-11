@@ -1,16 +1,12 @@
 import Head from 'next/head'
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-
+import { createInstance } from "@optimizely/optimizely-sdk";
 import { useRouter } from 'next/router'
 
 import ABComponent from "../component/ABComponent";
 import FeatureFlagComponent from "../component/FeatureFlagComponent";
 import MultiArmBanditComponent from "../component/MultiArmBanditComponent";
-
-import {
-  createInstance
-} from "@optimizely/optimizely-sdk";
 
 const sdkKey = process.env.NEXT_PUBLIC_SDK_KEY;
 const dataFileUrl = `https://cdn.optimizely.com/datafiles/${sdkKey}.json`;
@@ -34,7 +30,7 @@ export default function Home({...props}) {
   // Got user Id either via query-string, or, create a random one
   const { id } = router.query
   const userId = id || uuidv4();
-  console.log(`userId`, userId);
+  console.log(`user-id`, userId);
 
   let optimizelyUserContext;
 
@@ -71,13 +67,11 @@ export default function Home({...props}) {
       const fetchData = async () => {
         const response = await fetch(apiUrl);
         const json = await response.json();
-
-        console.log('API Call', apiUrl, json);
         setPostData(json);
       }
       fetchData().catch(console.error);
     });
-  }, [optimizelyUserContext]);
+  }, []);
 
   return (
     <>
@@ -104,18 +98,11 @@ export default function Home({...props}) {
       </section>
 
       <section id="main">
-        <div className="container">
-          <header>
-            <h2>
-              <strong>
-                {"AB Test Example"}
-              </strong>
-            </h2>
-          </header>
 
-          <ABComponent key={`${componentTitle}${backgroundColor}`} userId={userId} optimizelyClient={optimizelyClient} backgroundColor={backgroundColor} componentTitle={componentTitle} bannerText={bannerText} />
+          {component_title &&
+                      <ABComponent key={`${componentTitle}${backgroundColor}`} userId={userId} optimizelyClient={optimizelyClient} backgroundColor={backgroundColor} componentTitle={componentTitle} bannerText={bannerText} />
 
-        </div>
+          }
 
         <MultiArmBanditComponent key={postData.id} userId={userId} optimizelyClient={optimizelyClient} clientId={clientId} postId={postData.id} title={postData.title} />
 

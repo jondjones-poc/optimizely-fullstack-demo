@@ -3,19 +3,18 @@ import styles from './ABComponent.module.css'
 
 const sectionStyle = (backgroundColor) => (
 {
-        width: '100%',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        width: '100%',
-        padding: '60px 0',
-        textAlign: 'center',
-        background: backgroundColor,
-        color: 'white',
-        padding: `60px 0`,
-        textAlign: `center`,
+    width: '100%',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    width: '100%',
+    padding: '60px 0',
+    textAlign: 'center',
+    background: backgroundColor,
+    color: 'white',
+    padding: `60px 0`,
+    textAlign: `center`,
 });
-
 
 const ABComponent = ({...props}) => {
 
@@ -27,22 +26,32 @@ const ABComponent = ({...props}) => {
     }
 
     return (
-        <div className="header" id="component-a" style={sectionStyle(backgroundColor)} >
 
-            <h1 className={styles.titleHeading}>
-                {props.componentTitle}
-            </h1>
+        <div className="container">
+            <header>
+            <h2>
+                <strong>
+                A/B/C Experiment
+                </strong>
+            </h2>
+            </header>
+            <div className="header" id="component-a" style={sectionStyle(backgroundColor)} >
 
-            <div className={styles.titleText}>
-                {bannerText} today!
+                <h1 className={styles.titleHeading}>
+                    {props.componentTitle}
+                </h1>
+
+                <div className={styles.titleText}>
+                    {bannerText} today!
+                </div>
+
+                <a className={styles.btnBgstroke} onClick={addEvent} >
+                    Buy now
+                </a>
+
             </div>
-
-            <a className={styles.btnBgstroke} onClick={addEvent} >
-                Buy now
-            </a>
-
         </div>
     )
 }
 
-export default ABComponent
+export default ABComponent;

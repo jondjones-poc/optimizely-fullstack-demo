@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from "next/link";
 
 const DiscountBanner = ({...props}) => {
 
@@ -10,8 +9,9 @@ const DiscountBanner = ({...props}) => {
         console.log(`Banner ${postId} clicked`)
     }
 
-    if (!componentMessage)
+    if (!componentMessage) {
       return null;
+    }
 
     return (
       <section id="banner">
@@ -31,4 +31,4 @@ const DiscountBanner = ({...props}) => {
     )
 }
 
-export default DiscountBanner
+export default DiscountBanner;

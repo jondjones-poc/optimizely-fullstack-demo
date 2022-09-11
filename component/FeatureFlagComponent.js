@@ -25,7 +25,7 @@ const FeatureFlagComponent = ({...props}) => {
 
     return (
         <div className="container" id="feature-flag" onClick={featureFlagStyle} style={imageStyle}>
-                <img src={`images/${clientId}/feature.png`} style={imageStyle} alt="feature-flag" />
+            <img src={`images/${clientId}/feature.png`} style={imageStyle} alt="feature-flag" />
         </div>
     )
 }
