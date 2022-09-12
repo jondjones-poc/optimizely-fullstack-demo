@@ -4,9 +4,6 @@ import Layout from "../component/Layout";
 import stylesheet from '../styles/main.scss'
 
 function MyApp({ Component, pageProps, props}) {
-
-
-
   return (<>
             <TopHeader />
 

@@ -1,83 +1,81 @@
-import { fetchEntries } from '../utils/contentfulConnector';
-import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from "react";
-import Content from '../component/Content';
-import { useRouter } from 'next/router'
-import { createInstance } from "@optimizely/optimizely-sdk";
+import { useRouter } from 'next/router';
 
-const sdkKey = process.env.NEXT_PUBLIC_OPTIMIZELY_SDK_KEY_CONTENTFUL_PROJECT;
-const dataFileUrl = `https://cdn.optimizely.com/datafiles/${sdkKey}.json`;
+import { createInstance } from "@optimizely/optimizely-sdk";
+import { getDataFile, getUserId } from "../utils/optimizelyConnector";
+import { fetchContentfulEntries } from '../utils/contentfulConnector';
+
+import ContentRecommendations from '../component/ContentRecommendations'
+import VariationContainerRenderer from '../component/VariationContainerRenderer';
 
 const Home = (props) => {
 
+    const { fields, datafile, contentfulDatafile } = props;
+
     let [ variationId, setVariationToUse ] = useState('');
+    let [ contentRecsKey, setContentRecsKey ] = useState('');
 
-    const { fields, datafile } = props;
-    const router = useRouter();
+    const optimizelyClient = createInstance({datafile: datafile});
+    const optimizelyContentfulClient = createInstance({datafile: contentfulDatafile});
 
-    const optimizelyClient = createInstance({
-        datafile: datafile,
+    let optimizelyUserContext;
+
+    optimizelyClient.onReady().then(() => {
+      optimizelyUserContext = optimizelyClient.createUserContext(
+        userId
+      );
     });
 
-    const { id } = router.query
-    const userId = id || uuidv4();
-    console.log(`userId`, userId);
+    const router = useRouter();
+    const userId = getUserId(router);
 
     useEffect(() => {
         optimizelyClient.onReady().then(() => {
-            const variationToUse = optimizelyClient.activate('a_b', userId);
-            setVariationToUse(variationToUse)
-            console.log('result', variationToUse);
+            const variationToUse = optimizelyContentfulClient.activate('a_b', userId);
+            setVariationToUse(variationToUse);
+
+            const recommendations = optimizelyUserContext.decide('recommendations');
+            console.log('recommendations', recommendations);
+            setContentRecsKey(recommendations?.variables.contentRecsKey);
         });
-    }, [optimizelyClient, variationId]);
+    }, [optimizelyUserContext, optimizelyContentfulClient, userId]);
 
     return (
-        <section id="main">
-            <div className="container">
-                <div id="content" className="col-8 col-12-medium">
-
-                {fields.map((item, index) => {
-
-                    return (
-                    <article className="box post" key={index}>
-                        <header>
-                            <h2>
-                                {item.title}
-                            </h2>
-                        </header>
-                        <a href="#" className="image featured">
-                            <img src={item?.heroImage.fields.file.url} alt={item.slug} />
-                        </a>
-                        <Content content={item.content} variationToUse={variationId} />
-                        <div
-                            dangerouslySetInnerHTML={{
-                                __html: item.body,
-                            }}
-                        />
-
-                        <ul className="actions">
-                            <li>
-                                <a href="#" className="button icon solid fa-file">
-                                    Continue Reading
-                                </a>
-                            </li>
-                        </ul>
-                    </article>
-                )})
-                }
-            </div>
-        </div>
-        </section>
+        <>
+            <section id="main">
+                <div className="container">
+                    <div className="row">
+                        <div id="content" className="col-8 col-12-medium imp-medium">
+                            {fields.map((item, index) =>
+                                <VariationContainerRenderer
+                                    key={index}
+                                    item={item}
+                                    userId={userId}
+                                    optimizelyClient={optimizelyClient}
+                                    variationId={variationId} />
+                            )}
+                        </div>
+                        <div id="sidebar" className="col-4 col-12-medium">
+                            {contentRecsKey ?
+                                <ContentRecommendations contentRecsKey={contentRecsKey} /> :
+                                <img src={`images/sidebar.png`} alt="sidebar" style={{width: '100%'}} />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </>
     )
 }
 
 export async function getStaticProps() {
 
-    const response = await fetch(dataFileUrl);
-    const datafile = await response.json();
+    const datafile = await getDataFile();
+    const contentfulDatafile = await getDataFile(process.env.NEXT_PUBLIC_OPTIMIZELY_SDK_KEY_CONTENTFUL_PROJECT);
 
-    const entries = await fetchEntries();
-    let data = entries.items.filter(() => function() {
+    const contentfulResponse = await fetchContentfulEntries();
+
+    let data = contentfulResponse.items.filter(() => function() {
     return item.sys.contentType.sys.id === 'page'})
     const fields = data.map((item) => item.fields );
 
@@ -85,7 +83,8 @@ export async function getStaticProps() {
         props: {
             fields: fields,
             data: data,
-            datafile: datafile
+            datafile: datafile,
+            contentfulDatafile: contentfulDatafile
         }
     }
 
