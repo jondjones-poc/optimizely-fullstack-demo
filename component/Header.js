@@ -9,10 +9,6 @@ const sectionStyle = {
     backgroundSize: '100%'
 };
 
-const imageStyle = {
-    width: '100%'
-};
-
 const Header = ({...props}) => {
 
     const { clientId } = props;
@@ -21,7 +17,9 @@ const Header = ({...props}) => {
         <section id="header" style={sectionStyle}>
             <Link href="/">
                 <a>
-                    <img src={`images/${clientId}/header.png`} style={imageStyle} alt="Header" />
+                    <img src={`images/${clientId}/header.png`}
+                         style={{width: '100%'}}
+                         alt="Header" />
                 </a>
             </Link>
         </section>

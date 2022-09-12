@@ -18,12 +18,7 @@ const sectionStyle = (backgroundColor) => (
 
 const ABComponent = ({...props}) => {
 
-    const { backgroundColor, bannerText } = props;
-
-    const addEvent = () => {
-        console.log("AB Component Event Example")
-        props.optimizelyClient.track('button_click', props.userId);
-    }
+    const { backgroundColor, bannerText, buttonUrl } = props;
 
     return (
 
@@ -31,7 +26,7 @@ const ABComponent = ({...props}) => {
             <header>
             <h2>
                 <strong>
-                A/B/C Experiment
+                    A/B/C Experiment
                 </strong>
             </h2>
             </header>
@@ -45,7 +40,7 @@ const ABComponent = ({...props}) => {
                     {bannerText} today!
                 </div>
 
-                <a className={styles.btnBgstroke} onClick={addEvent} >
+                <a className={styles.btnBgstroke} href={buttonUrl} >
                     Buy now
                 </a>
 

@@ -7,15 +7,15 @@ const sectionStyle = {
     height: '100%'
 };
 
-const imageStyle = {
-    width: '100%'
-};
-
 const Footer = ({clientId}) => {
 
     return (
         <section id="footer" style={sectionStyle}>
-            <img src={`images/${clientId}/footer.png`} style={imageStyle} alt="Footer" />
+
+            <img src={`images/${clientId}/footer.png`}
+                 style={{width: '100%'}}
+                 alt="Footer" />
+
         </section>
     );
 }

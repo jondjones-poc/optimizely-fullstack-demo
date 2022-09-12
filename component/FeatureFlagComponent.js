@@ -11,22 +11,37 @@ const featureFlagStyle = {
     backgroundSize: '100%'
 }
 
-const imageStyle = {
-    width: '100%'
-};
-
 const FeatureFlagComponent = ({...props}) => {
 
-    const { userId, optimizelyClient, clientId } = props;
+    const { userId, optimizelyClient, clientId, isFeatureEnabled } = props;
 
-    const addEvent = () => {
+    const addEvent = (optimizelyClient, userId) => {
         optimizelyClient?.track('button_click', userId);
+        console.log('feature_flag_component_click')
     }
 
     return (
-        <div className="container" id="feature-flag" onClick={featureFlagStyle} style={imageStyle}>
-            <img src={`images/${clientId}/feature.png`} style={imageStyle} alt="feature-flag" />
+        <section id="features">
+            <div className="container" id="feature-container">
+            <header>
+                <h2>
+                <strong>
+                    {"Feature Flag Example: " + isFeatureEnabled}
+                </strong>
+                </h2>
+            </header>
+            {isFeatureEnabled &&
+                <div className="container"
+                     id="feature-flag"
+                     onClick={() => addEvent(optimizelyClient, userId)} style={featureFlagStyle}>
+
+                    <img src={`images/${clientId}/feature.png`}
+                         style={{width: '100%'}}
+                         alt="feature-flag" />
+                </div>
+            }
         </div>
+      </section>
     )
 }
 
