@@ -33,7 +33,7 @@ const MultiArmBanditComponent = ({...props}) => {
                   <a onClick={() => bannerClicked(optimizelyClient)}>
                     <img src={`images/${clientId}/${postId}.png`} style={imageStyle} alt="multi-arm bandit" />
                   </a>
-                </Link>{" "}
+                </Link>
               </div>
         </div>
     )
