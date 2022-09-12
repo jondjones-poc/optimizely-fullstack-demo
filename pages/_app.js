@@ -1,12 +1,9 @@
 import '../styles/globals.css'
-import TopHeader from '../component/TopHeader'
-import Layout from "../component/Layout";
+import TopHeader from '../layout/TopHeader'
+import Layout from "../layout/Layout";
 import stylesheet from '../styles/main.scss'
 
 function MyApp({ Component, pageProps, props}) {
-
-
-
   return (<>
             <TopHeader />
 
@@ -23,6 +20,7 @@ export default MyApp;
 MyApp.getInitialProps  = async (context) => {
 
       const clientId = context.ctx.req.headers.client ?? "default";
+      console.log('clientId', clientId)
 
       return {
         props: {

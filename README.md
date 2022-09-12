@@ -9,13 +9,28 @@ This project makes uses of NextJs, Optimizely Fullstack and the JS SDK.  I want 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/19b26768-2571-46e7-89b3-eefc07ec35c2/deploy-status)](https://app.netlify.com/sites/optimizely-demo/deploys)
 
+## Api
+
+- [API](https://optimizely-demo.netlify.app/.netlify/functions/admin)
+
 ## How To Use ☄️
 
-First, run the development server:
+**Website**: First, run the development server:
 
 ```bash
 npm run dev
 ```
+
+The site will load on `http:localhost:3000`
+
+**API**:  To update or run the admin API run:
+
+```bash
+npm run start-api
+```
+
+The API will load on `http://localhost:9000/admin`
+
 
 Click this button to create a new Github repo, new Netlify project and deploy this example yourself
 

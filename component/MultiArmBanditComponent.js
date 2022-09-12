@@ -1,14 +1,6 @@
 import React from 'react'
 import Link from "next/link";
 
-const sectionStyle = {
-  width: '100%'
-};
-
-const imageStyle = {
-  width: '100%'
-};
-
 const MultiArmBanditComponent = ({...props}) => {
 
     const { userId, postId, optimizelyClient, clientId } = props;
@@ -28,12 +20,14 @@ const MultiArmBanditComponent = ({...props}) => {
                 </h2>
               </header>
 
-              <div id="multi-arm-bandit" style={sectionStyle}>
+              <div id="multi-arm-bandit" style={{width: '100%'}}>
                 <Link href="/">
                   <a onClick={() => bannerClicked(optimizelyClient)}>
-                    <img src={`images/${clientId}/${postId}.png`} style={imageStyle} alt="multi-arm bandit" />
+                    <img src={`images/${clientId}/${postId}.png`}
+                         style={{width: '100%'}}
+                         alt="multi-arm bandit" />
                   </a>
-                </Link>{" "}
+                </Link>
               </div>
         </div>
     )
