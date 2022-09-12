@@ -19,6 +19,7 @@ export default function Home({...props}) {
   let [ backgroundColor, setBackgroundColor ] = useState('');
   let [ componentTitle, setComponentTitle ] = useState('');
   let [ bannerText, setBannerText ] = useState('');
+  let [ buttonUrl, setButtonUrl ] = useState('');
   let [ postData, setPostData ] = useState({});
 
   const router = useRouter()
@@ -59,6 +60,7 @@ export default function Home({...props}) {
       setBackgroundColor(abTestFlag.variables.backgroundcolour);
       setComponentTitle(abTestFlag.variables.component_title);
       setBannerText(abTestFlag.variables.button_text);
+      setButtonUrl(abTestFlag.variables.button_url);
 
       /// Multi-arm bandit code
       const apiDataJson = optimizelyClient.getFeatureVariable('multi-arm_bandit', 'api_data', userId);
@@ -92,20 +94,31 @@ export default function Home({...props}) {
           </header>
 
           {isFeatureEnabled &&
-            <FeatureFlagComponent userId={userId} optimizelyClient={optimizelyClient} clientId={clientId} />
+            <FeatureFlagComponent userId={userId}
+                                  optimizelyClient={optimizelyClient}
+                                  clientId={clientId} />
           }
         </div>
       </section>
 
       <section id="main">
 
-          {component_title &&
-                      <ABComponent key={`${componentTitle}${backgroundColor}`} userId={userId} optimizelyClient={optimizelyClient} backgroundColor={backgroundColor} componentTitle={componentTitle} bannerText={bannerText} />
-
+          {componentTitle &&
+            <ABComponent  key={`${componentTitle}${backgroundColor}`}
+                          userId={userId}
+                          optimizelyClient={optimizelyClient}
+                          backgroundColor={backgroundColor}
+                          componentTitle={componentTitle}
+                          bannerText={bannerText}
+                          buttonUrl={buttonUrl} />
           }
 
-        <MultiArmBanditComponent key={postData.id} userId={userId} optimizelyClient={optimizelyClient} clientId={clientId} postId={postData.id} title={postData.title} />
-
+        <MultiArmBanditComponent  key={postData.id}
+                                  userId={userId}
+                                  optimizelyClient={optimizelyClient}
+                                  clientId={clientId}
+                                  postId={postData.id}
+                                  title={postData.title} />
       </section>
     </>
   )

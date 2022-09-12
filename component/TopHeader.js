@@ -5,11 +5,14 @@ export default function TopHeader() {
 
     const navLinks =
         [
-            {   name: "Personalisation",
+            {   name: "PLP Page",
                 path: "/landing"
             },
-            {   name: "CMS",
+            {   name: "Landing Page",
                 path: "/cms"
+            },
+            {   name: "Code",
+                path: "https://github.com/jondjones-poc/optimizely-fullstack-demo"
             }
         ];
 
