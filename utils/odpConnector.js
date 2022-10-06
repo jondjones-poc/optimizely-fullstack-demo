@@ -1,4 +1,5 @@
 import axios from 'axios';
+import randomWords from 'random-words';
 axios.defaults.headers.common['x-api-key'] = process.env.NEXT_PUBLIC_ODP_KEY;
 
 const config = {
@@ -19,6 +20,32 @@ export async function getOdpSegmentData(segment) {
       });
 }
 
+export async function updateOdpProfileData(email) {
+
+  const url = `https://api.zaius.com/v3/profiles`;
+
+  axios.defaults.headers.common = {
+    "X-API-Key": process.env.NEXT_PUBLIC_ODP_KEY,
+  };
+
+  await axios({
+          method: "post",
+          url: url,
+          config,
+          data: {
+            attributes: {
+              email: email,
+              requested_sales_pack: "true",
+              first_name: randomWords(),
+              last_name: randomWords(),
+              job_title: "Marketing"
+            }
+          }
+        })
+      .then(response => console.log('updateOdpProfileData response', response.data))
+      .catch(err => console.error(err));
+}
+
 export async function getOdpProfileData(email) {
 
   const url = `https://api.zaius.com/v3/profiles?email=${email}`;
@@ -36,7 +63,7 @@ export async function getOdpProfileData(email) {
       .then(data => data.attributes)
       .catch(err => console.error(err));
 
-  console.log('getOdpProfileData', email, profileData);
+  console.log('getOdpProfileData API:', email, profileData);
 
   return profileData;
 }
