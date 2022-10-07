@@ -1,8 +1,8 @@
 import React from 'react'
 
-const PersonlisationBanner = ({...props}) => {
+const PersonalizedBanner = ({...props}) => {
 
-  console.log('PersonlisationBanner', props);
+  console.log('PersonalizedBanner', props);
 
   const { profileData } = props;
 
@@ -20,4 +20,4 @@ const PersonlisationBanner = ({...props}) => {
   )
 }
 
-export default PersonlisationBanner;
+export default PersonalizedBanner;

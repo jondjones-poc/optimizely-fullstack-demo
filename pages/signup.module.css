@@ -1,3 +1,17 @@
+  .signUpContainer {
+    padding-bottom: 1rem;
+  }
+
+  .signupStyle {
+    background-color: '#000000';
+    padding: '1rem';
+  }
+
+  .signupBtn {
+    padding-top: '1rem';
+    text-align: 'center';
+  }
+
   .authWrapper {
     display: flex;
     justify-content: center;

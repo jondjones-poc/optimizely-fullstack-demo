@@ -3,21 +3,12 @@ import React, { useEffect, useState } from "react";
 import { updateOdpProfileData, getOdpProfileData } from "../utils/odpConnector";
 import { createInstance } from "@optimizely/optimizely-sdk";
 
-import PersonlisationBanner from "../component/PersonlisationBanner";
+import PersonalizedBanner from "../component/PersonalizedBanner";
 
 import styles from './signup.module.css';
 import Cookies from 'js-cookie';
+
 const userId = 'random';
-
-const signupStyle = {
-    backgroundColor: '#000000',
-    padding: '1rem'
-};
-
-const signupBtn= {
-    paddingTop: '1rem',
-    textAlign: 'center'
-}
 
 async function callOdp(event, setEmail) {
 
@@ -40,7 +31,8 @@ async function callOdp(event, setEmail) {
 const Signup = (props) => {
 
     const { datafile } = props;
-    const [ odpBanner, setRenderOdpBanner ] = useState(false);
+
+    const [ displayPersonalizedBanner, setDisplayPersonalizedBanner ] = useState(false);
     const [ email, setEmail ] = useState(Cookies.get('email'));
     const [ profileData, setProfileData ] = useState({});
 
@@ -61,9 +53,7 @@ const Signup = (props) => {
          const fetchData = async (email) => {
 
             const profileData = await fetchOdpData(email).catch(console.error);
-
             setProfileData(profileData);
-            console.log('odp feature - profileData', profileData);
 
             optimizelyClient.onReady().then(() => {
 
@@ -77,7 +67,7 @@ const Signup = (props) => {
                 const decision  = optimizelyUserContext.decide('odp');
                 console.log('odp feature - decision', decision.enabled);
 
-                setRenderOdpBanner(decision.enabled);
+                setDisplayPersonalizedBanner(decision.enabled);
             });
          };
          if (email) {
@@ -89,23 +79,26 @@ const Signup = (props) => {
     useEffect(() => {
 
     }, [email]);
-console.log('odpBanner', odpBanner)
+
     return (
         <>
-            {odpBanner ?
-                <PersonlisationBanner profileData={profileData} /> :
-                null
+            {displayPersonalizedBanner ?
+                <PersonalizedBanner profileData={profileData} />
+                : null
             }
             <section id="main">
-                <div className="container">
+                <div className={`container ${styles.signUpContainer}`}>
                     <div className="row">
-                        <div id="content" className="col-12 col-12-medium imp-medium">
+                        <div className="col-6 col-12-medium imp-medium">
+                            Welcome text.  Clear cookie.
+                        </div>
+                        <div id="content" className="col-6 col-12-medium imp-medium">
                             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
                             <h1>
                                 Register For Event
                             </h1>
-                            <form style={signupStyle} onSubmit={(e) => callOdp(e, setEmail)}>
-                                <div className="mb-3" style={signupStyle}>
+                            <form className={styles.signupStyle} onSubmit={(e) => callOdp(e, setEmail)}>
+                                <div className={`mb-3 ${styles.signupStyle}`} >
                                     <input
                                         type="text"
                                         id="username"
@@ -113,7 +106,7 @@ console.log('odpBanner', odpBanner)
                                         placeholder="Add email"
                                     />
                                 </div>
-                                <div className="d-grid" style={signupBtn}>
+                                <div className={`d-grid ${styles.signupBtn}`}>
                                     <button type="submit" className="btn" >
                                         Sign Up
                                     </button>
