@@ -19,7 +19,7 @@ export async function getOdpSegmentData(segment) {
       });
 }
 
-export async function updateOdpProfileData(email) {
+export async function updateOdpProfileData(email, location) {
 
   const url = `https://api.zaius.com/v3/profiles`;
 
@@ -27,21 +27,28 @@ export async function updateOdpProfileData(email) {
     "X-API-Key": process.env.NEXT_PUBLIC_ODP_KEY,
   };
 
+
+  const data = {
+    attributes: {
+      email: email,
+      requested_sales_pack: "true",
+      job_title: "Marketing"
+    }
+  };
+
+  if (location) {
+    data.attributes.state = location;
+    console.log('locationlocationlocation', location, data)
+  }
+
   const response = await axios({
           method: "post",
           url: url,
           config,
-          data: {
-            attributes: {
-              email: email,
-              requested_sales_pack: "true",
-              job_title: "Marketing"
-
-            }
-          }
+          data: data
         })
       .then(response => response.data)
-      .catch(err => console.error(err));
+      .catch(err => console.error("Error", err));
 
       return response;
 }

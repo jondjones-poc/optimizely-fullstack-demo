@@ -1,0 +1,24 @@
+.textBox {
+  font-weight: 400;
+  font-size: 0.8rem;
+  line-height: 2.7rem;
+  border-radius: 2rem !important;
+  border: white !important;
+  padding: 0.5rem 2rem !important;
+  max-height: 4rem;
+  height: 4rem;
+  --form-field-bg-color: white;
+  background-color: white !important;
+}
+
+.textBox:focus, .textBox:active, .textBox:focus-visible {
+    outline: solid 0.2rem #0037ff;;
+}
+
+.formInput {
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}

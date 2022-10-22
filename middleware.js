@@ -11,10 +11,11 @@ export async function middleware(nextRequest) {
 
   const GOOGLE_API_KEY = Deno.env.get('NEXT_PUBLIC_GOOGLE_API_KEY');
   const address = nextRequest.cookies.get('state');
+  const country = nextRequest.cookies.get('country') ?? '';
 
   const api = new URL('https://maps.googleapis.com/maps/api/geocode/json');
 
-  api.searchParams.set('address', address);
+  api.searchParams.set('address', `${address}${country}`);
   api.searchParams.set('key', GOOGLE_API_KEY);
 
   const res = await fetch(api.toString());

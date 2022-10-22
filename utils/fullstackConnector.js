@@ -11,19 +11,22 @@ export async function getDataFile(sdkKey = process.env.NEXT_PUBLIC_SDK_KEY) {
 }
 
 export async function getFeatureFlagStatus(optimizelyClient, userId, attributes, flagName) {
+  let flagData;
 
-  let decision = {};
-  optimizelyClient.onReady().then(() => {
+  await optimizelyClient.onReady().then(() => {
     const optimizelyUserContext = optimizelyClient.createUserContext(
           userId,
           attributes
     );
 
-    decision  = optimizelyUserContext.decide(flagName);
-    console.log(`${flagName} feature - decision`, decision.enabled);
+    const decision  = optimizelyUserContext.decide(flagName);
+
+    flagData = decision;
+    console.log(`${flagName} feature - decision`, decision);
   })
 
-  return decision;
+  return flagData;
+
 };
 
   // Got user Id either via query-string, or, create a random one

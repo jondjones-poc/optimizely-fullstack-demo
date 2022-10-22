@@ -1,63 +1,52 @@
-  .signUpContainer {
-    padding-bottom: 1rem;
-  }
+.mainContainer {
+  background-color: #f6f6f6 !important;
+}
 
-  .signupStyle {
-    background-color: '#000000';
-    padding: '1rem';
-  }
+.blueBackground {
+  background-color: #cecdd6 !important;
+  border-radius: 1.5rem;
+  padding: 0;
+}
 
-  .signupBtn {
-    padding-top: '1rem';
-    text-align: 'center';
-  }
+.reset {
+  padding: 0;
+}
 
-  .authWrapper {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    text-align: left;
-  }
-  .authInner {
-    width: 450px;
-    margin: auto;
-    background: #ffffff;
-    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-    padding: 40px 55px 45px 55px;
-    border-radius: 15px;
-    transition: all .3s;
-  }
-  .authWrapper .formControl:focus {
-    border-color: #167bff;
-    box-shadow: none;
-  }
-  .authWrapper h3 {
-    text-align: center;
-    margin: 0;
-    line-height: 1;
-    padding-bottom: 20px;
-  }
-  .custom-control-label {
-    font-weight: 400;
-  }
-  .forgotPassword,
-  .forgotPassword a {
-    text-align: right;
-    font-size: 13px;
-    padding-top: 10px;
-    color: #7f7d7d;
-    margin: 0;
-  }
-  .forgotPassword a {
-    color: #167bff;
-  }
+.signUpContainer {
+  padding-bottom: 1rem;
+  margin-top: 6rem;
+}
 
+.container {
+  align-items: stretch;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+}
 
+.formContainer {
+  background-color: #f6f6f6;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  text-align: center;
+  margin: 1rem;
+}
 
-  .container {
-    align-items: stretch;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    height: 100vh;
-  }
+.formTitle {
+  font-family: TT Commons,Arial,sans-serif;
+  font-weight: 600;
+  color: black;
+  text-transform: unset;
+  margin-top: 1rem;
+  line-height: 1.4rem;
+  font-size: 1.6rem;
+}
 
+.textContainer {
+  font-size: 4rem;
+  text-align: left;
+  line-height: 5rem;
+  text-transform: capitalize;
+  width: 80%;
+  padding: unset;
+}

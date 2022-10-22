@@ -1,114 +1,77 @@
 import { useEffect, useState } from "react";
 import { createInstance } from "@optimizely/optimizely-sdk";
-import { useRouter } from 'next/router'
 
 import { getDataFile, getFeatureFlagStatus } from "../utils/fullstackConnector";
-import { updateOdpProfileData, getOdpProfileData } from "../utils/odpConnector";
 
 import MapContainer from "../component/MapContainer";
+import PersonalizedForm from "../component/PersonalizedForm";
 
 import styles from '../styles/signup.module.css';
 import Cookies from 'js-cookie';
 
 const userId = 'random';
 
-const fetchOdpData = async (email) => {
-    const profileData = await getOdpProfileData(email);
-    const requestedSalesPack = profileData?.requested_sales_pack;
-
-    console.log('requestedSalesPack', profileData, requestedSalesPack);
-
-    return profileData;
- };
-
-async function submitForm(event, setEmail, router) {
-
-    event.preventDefault();
-
-    const email = event?.target?.username?.value;
-    console.log('Submitted email', email);
-
-    if (email) {
-        const response = await updateOdpProfileData(email);
-        console.log('submitForm', response);
-
-        const profileData = await fetchOdpData(email).catch(console.error);
-
-        Cookies.set('state', profileData.state);
-        Cookies.set('email', email);
-        setEmail(email);
-
-        router.reload(window.location.pathname)
-    }
-
-    return;
-}
-
 const Signup = (props) => {
 
     const { datafile, mapCords, address } = props;
 
-    const [ displayPersonalizedBanner, setDisplayPersonalizedBanner ] = useState(false);
-    const [ email, setEmail ] = useState(Cookies.get('email'));
-    const router = useRouter()
+    const [ featureDecisionData, setFeatureDecisionData ] = useState({});
+    const [ displayMap, setDisplayMap ] = useState(false);
 
-    const optimizelyClient = createInstance({datafile: datafile});
+    const email = Cookies.get('email');
+    const state = Cookies.get('state') ?? null;
+    const requestedSalesPack = Cookies.get('requestedSalesPack') ?? false;
+
 
     useEffect(() => {
 
          const fetchData = async () => {
 
-            const decision = await getFeatureFlagStatus(
+            const optimizelyClient = createInstance({datafile: datafile});
+            const featureDecisionData = await getFeatureFlagStatus(
                 optimizelyClient,
                 userId, {
-                    hasRequestedSalesPack: true
+                    hasRequestedSalesPack: requestedSalesPack,
+                    location: state
                 },
                 'odp');
 
-
-            console.log("ddd", decision)
-            setDisplayPersonalizedBanner(true);
+            setFeatureDecisionData(featureDecisionData);
+            setDisplayMap(featureDecisionData?.enabled && (mapCords.lat !== null || mapCords.lng !== null))
          };
 
          if (email) {
             fetchData(email);
          }
 
-    }, [email]);
+    }, [email, state, requestedSalesPack, mapCords]);
 
     return (
+
         <>
-            {displayPersonalizedBanner ?
-                <MapContainer mapCords={mapCords} address={address} />
+            {displayMap ?
+                <MapContainer mapCords={mapCords} address={address} featureDecisionData={featureDecisionData} />
                 : null
             }
-
-            <section id="main">
+            <section id="main" className={`${styles.mainContainer}`}>
                 <div className={`container ${styles.signUpContainer}`}>
                     <div className="row">
-                        <div className="col-6 col-12-medium imp-medium">
-                            Welcome text
+                        <div id="content" className={`col-8 col-12-medium ${styles.reset}`}>
+                            <div className={`${styles.formContainer}`}>
+                                <div className={`${styles.textContainer}`}>
+                                    See how we can help you
+                                    increase your ROI
+                                </div>
+                            </div>
                         </div>
-                        <div id="content" className="col-6 col-12-medium imp-medium">
-                            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-                            <h1>
-                                Register For Event
-                            </h1>
-                            <form className={styles.signupStyle} onSubmit={(e) => submitForm(e, setEmail, router)}>
-                                <div className={`mb-3 ${styles.signupStyle}`} >
-                                    <input
-                                        type="text"
-                                        id="username"
-                                        className={styles.formControl}
-                                        placeholder="Add email"
-                                    />
+                        <div id="content" className={`col-4 col-12-medium ${styles.blueBackground}`}>
+                            <div className={`${styles.formContainer}`}>
+                                <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+                                    <h1 className={`${styles.formTitle}`}>
+                                        Register For Event
+                                    </h1>
+                                    <PersonalizedForm email={email} state={state} />
                                 </div>
-                                <div className={`d-grid ${styles.signupBtn}`}>
-                                    <button type="submit" className="btn" >
-                                        Sign Up
-                                    </button>
-                                </div>
-                            </form>
                             </div>
                         </div>
                     </div>
@@ -122,8 +85,8 @@ export async function getStaticProps() {
     const datafile = await getDataFile();
     return {
         props: {
-            address: 'Missoula, MT, US',
-            mapCords: { lat: 46.8721, lng: -113.994 },
+            address: '',
+            mapCords: { lat: null, lng: null },
             datafile: datafile,
         }
     }
