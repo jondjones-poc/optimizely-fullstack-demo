@@ -10,6 +10,22 @@ export async function getDataFile(sdkKey = process.env.NEXT_PUBLIC_SDK_KEY) {
     return dataFile;
 }
 
+export async function getFeatureFlagStatus(optimizelyClient, userId, attributes, flagName) {
+
+  let decision = {};
+  optimizelyClient.onReady().then(() => {
+    const optimizelyUserContext = optimizelyClient.createUserContext(
+          userId,
+          attributes
+    );
+
+    decision  = optimizelyUserContext.decide(flagName);
+    console.log(`${flagName} feature - decision`, decision.enabled);
+  })
+
+  return decision;
+};
+
   // Got user Id either via query-string, or, create a random one
 export function getUserId(router) {
 
@@ -19,4 +35,3 @@ export function getUserId(router) {
 
     return userId;
 }
-

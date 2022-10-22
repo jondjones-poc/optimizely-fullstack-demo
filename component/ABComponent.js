@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './ABComponent.module.css'
+import styles from '../styles/ABComponent.module.css'
 
 const sectionStyle = (backgroundColor) => (
 {

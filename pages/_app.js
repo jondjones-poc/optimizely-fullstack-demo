@@ -20,8 +20,6 @@ export default MyApp;
 MyApp.getInitialProps  = async (context) => {
 
       const clientId = context.ctx.req.headers.client ?? "default";
-      console.log('clientId', clientId)
-
       return {
         props: {
             clientId: clientId

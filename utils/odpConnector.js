@@ -1,5 +1,4 @@
 import axios from 'axios';
-import randomWords from 'random-words';
 axios.defaults.headers.common['x-api-key'] = process.env.NEXT_PUBLIC_ODP_KEY;
 
 const config = {
@@ -28,7 +27,7 @@ export async function updateOdpProfileData(email) {
     "X-API-Key": process.env.NEXT_PUBLIC_ODP_KEY,
   };
 
-  await axios({
+  const response = await axios({
           method: "post",
           url: url,
           config,
@@ -36,14 +35,15 @@ export async function updateOdpProfileData(email) {
             attributes: {
               email: email,
               requested_sales_pack: "true",
-              first_name: randomWords(),
-              last_name: randomWords(),
               job_title: "Marketing"
+
             }
           }
         })
-      .then(response => console.log('updateOdpProfileData response', response.data))
+      .then(response => response.data)
       .catch(err => console.error(err));
+
+      return response;
 }
 
 export async function getOdpProfileData(email) {
@@ -84,6 +84,6 @@ export async function trackEvent(type = 'enquiry', email) {
     }).then(response => {
       console.log('trackEvent', response);
     }).catch(exception => {
-      console.log('trackEvent - error', exception);
+      console.log('trackEventError', exception);
     });
 }

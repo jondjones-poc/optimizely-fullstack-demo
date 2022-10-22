@@ -13,5 +13,5 @@ module.exports = {
   },
   images: {
     domains: ['localhost', 'optimizely-demo.netlify.app'],
-  },
+  }
 }

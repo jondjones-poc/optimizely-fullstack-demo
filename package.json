@@ -1,5 +1,5 @@
 {
-  "name": "optimizely-fullstack-javascript",
+  "name": "optimizely-fullstack-demo",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,28 +12,32 @@
     "build-api": "netlify-lambda build functions"
   },
   "dependencies": {
-    "@babel/core": "^7.18.2",
+    "@babel/core": "^7.19.6",
+    "@babel/runtime": "^7.19.4",
     "@contentful/rich-text-html-renderer": "^15.13.1",
+    "@googlemaps/react-wrapper": "^1.1.35",
+    "@netlify/next": "^1.3.1",
     "@optimizely/js-sdk-logging": "^0.3.1",
-    "@optimizely/optimizely-sdk": "^4.9.1",
+    "@optimizely/optimizely-sdk": "^4.9.2",
     "@zeit/next-sass": "^1.0.1",
-    "autoprefixer": "^10.4.7",
+    "autoprefixer": "^10.4.12",
     "axios": "^0.25.0",
     "babel-loader": "^8.2.5",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-wrap-in-js": "^1.1.1",
-    "contentful": "^9.1.34",
+    "contentful": "^9.2.5",
     "cookie": "^0.5.0",
-    "dotenv": "^16.0.2",
+    "dotenv": "^16.0.3",
     "js-cookie": "^3.0.1",
     "netlify-lambda": "^2.0.15",
-    "next": "11.1.2",
+    "next": "^12.3.1",
     "postcss-easy-import": "^4.0.0",
-    "postcss-loader": "^7.0.0",
+    "postcss-loader": "^7.0.1",
     "random-words": "^1.2.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "sass-loader": "^13.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "sass-loader": "^13.1.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -41,6 +45,6 @@
     "eslint-config-next": "11.1.2",
     "eslint-import-resolver-babel-module": "^5.3.1",
     "eslint-plugin-import": "^2.26.0",
-    "sass": "^1.52.1"
+    "sass": "^1.55.0"
   }
 }

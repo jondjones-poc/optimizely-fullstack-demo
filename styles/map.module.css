@@ -1,0 +1,10 @@
+.container {
+  align-items: stretch;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 40vh;
+}
+
+.map {
+  position: inherit !important;
+}
