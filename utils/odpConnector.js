@@ -28,7 +28,7 @@ export async function updateOdpProfileData(email) {
     "X-API-Key": process.env.NEXT_PUBLIC_ODP_KEY,
   };
 
-  await axios({
+  const response = await axios({
           method: "post",
           url: url,
           config,
@@ -38,12 +38,15 @@ export async function updateOdpProfileData(email) {
               requested_sales_pack: "true",
               first_name: randomWords(),
               last_name: randomWords(),
-              job_title: "Marketing"
+              job_title: "Marketing",
+              state: "London"
             }
           }
         })
-      .then(response => console.log('updateOdpProfileData response', response.data))
+      .then(response => response.data)
       .catch(err => console.error(err));
+
+      return response;
 }
 
 export async function getOdpProfileData(email) {
@@ -84,6 +87,6 @@ export async function trackEvent(type = 'enquiry', email) {
     }).then(response => {
       console.log('trackEvent', response);
     }).catch(exception => {
-      console.log('trackEvent - error', exception);
+      console.log('trackEventError', exception);
     });
 }
