@@ -1,10 +1,16 @@
 import Head from 'next/head'
 import React from 'react';
+import { clarity } from 'react-microsoft-clarity';
+import { useEffect } from "react";
 
 import Header from './Header'
 import Footer from './Footer';
 
 const Layout = ({children, clientId, ...props}) => {
+
+    useEffect(() => {
+        clarity.init("ektblhb8nt")
+    })
 
     return (
         <>
@@ -12,6 +18,8 @@ const Layout = ({children, clientId, ...props}) => {
                 <title>Optimizely Demo</title>
                 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600,600i" rel="stylesheet" />
                 <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
+
+
             </Head>
 
             <style dangerouslySetInnerHTML={{ __html: props.stylesheet }} />
