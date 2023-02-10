@@ -6,3 +6,12 @@ NEXT_USE_NETLIFY_EDGE = "true"
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
+
+[[headers]]
+for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "0"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = "default-src 'self'; style-src 'self'; form-action 'self'; script-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'self';"
