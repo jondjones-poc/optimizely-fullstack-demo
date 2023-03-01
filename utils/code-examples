@@ -1,0 +1,47 @@
+import { createInstance } from "@optimizely/optimizely-sdk";
+
+
+// Datafil
+const optimizelyClient = createInstance({
+    sdkKey: sdkKey,
+});
+
+
+const datafile = await fetch(`https://cdn.optimizely.com/datafiles/${sdkKey}.json`);
+const optimizelyClient = createInstance({
+    datafile: datafile,
+    datafileOptions: {
+        autoUpdate: true,
+        updateInterval: 600000, // 10 minutes in milliseconds
+      },
+});
+
+
+// Assigning a user
+optimizelyClient.onReady().then(() => {
+    optimizelyUserContext = optimizelyClient.createUserContext(
+      userId,
+      {
+        segment: segment,
+        user: segment
+      }
+    );
+  });
+
+
+// Bucketing example
+useEffect(() => {
+    optimizelyClient.onReady().then(() => {
+
+      const decision  = optimizelyUserContext.decide('ab_test');
+
+      const componentMessage = decision.variables.component_message;
+      const discountAmount = decision.variables.discount_amount;
+    });
+}, []);
+
+
+// Log an event
+const activateUser = (componentName) => {
+    optimizelyClient.track('banner_click', componentName);
+};
