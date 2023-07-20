@@ -7,7 +7,7 @@ const featureFlagStyle = {
     position: 'relative',
     width: '100%',
     height: '0',
-    paddingBottom:'20%',
+    paddingBottom:'30%',
     backgroundSize: '100%'
 }
 
@@ -23,24 +23,21 @@ const FeatureFlagComponent = ({...props}) => {
     return (
         <section id="features">
             <div className="container" id="feature-container">
-            <header>
-                <h2>
-                <strong>
-                    {"Feature Flag Example: " + isFeatureEnabled}
-                </strong>
-                </h2>
-            </header>
+
             {isFeatureEnabled &&
                 <div className="container"
                      id="feature-flag"
                      onClick={() => addEvent(optimizelyClient, userId)} style={featureFlagStyle}>
 
-                    <img src={`images/${clientId}/feature.png`}
+
+                    <img src={`images/${clientId}/1.png`}
                          style={{width: '100%'}}
                          alt="feature-flag" />
                 </div>
             }
-        </div>
+
+
+            </div>
       </section>
     )
 }

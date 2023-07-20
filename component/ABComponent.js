@@ -23,13 +23,7 @@ const ABComponent = ({...props}) => {
     return (
 
         <div className="container">
-            <header>
-            <h2>
-                <strong>
-                    A/B/C Experiment
-                </strong>
-            </h2>
-            </header>
+
             <div className="header" id="component-a" style={sectionStyle(backgroundColor)} >
 
                 <h1 className={styles.titleHeading}>
@@ -45,6 +39,8 @@ const ABComponent = ({...props}) => {
                 </a>
 
             </div>
+
+
         </div>
     )
 }

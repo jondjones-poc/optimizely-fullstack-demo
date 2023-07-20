@@ -86,12 +86,21 @@ export default function Home({...props}) {
                         buttonUrl={buttonUrl} />
         }
 
-        <MultiArmBanditComponent  key={postData.id}
+<div className="container"
+                     id="feature-flag"
+                     onClick={() => addEvent(optimizelyClient, userId)} >
+
+                    <img src={`images/${clientId}/feature.png`}
+                         style={{width: '100%'}}
+                         alt="feature-flag" />
+                </div>
+
+        {/* <MultiArmBanditComponent  key={postData.id}
                                   userId={userId}
                                   optimizelyClient={optimizelyClient}
                                   clientId={clientId}
                                   postId={postData.id}
-                                  title={postData.title} />
+                                  title={postData.title} /> */}
       </section>
     </>
   )
