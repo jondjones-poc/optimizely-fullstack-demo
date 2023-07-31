@@ -12,14 +12,6 @@ const MultiArmBanditComponent = ({...props}) => {
 
     return (
         <div className="container">
-              <header>
-                <h2>
-                  <strong>
-                    {`Multi-arm Bandit Example: ${postId}`}
-                  </strong>
-                </h2>
-              </header>
-
               <div id="multi-arm-bandit" style={{width: '100%'}}>
                 <Link href="/">
                   <a onClick={() => bannerClicked(optimizelyClient)}>

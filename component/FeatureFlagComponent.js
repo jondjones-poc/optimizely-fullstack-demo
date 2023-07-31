@@ -5,9 +5,7 @@ const featureFlagStyle = {
     display: 'block',
     backgroundRepeat: 'no-repeat',
     position: 'relative',
-    width: '100%',
-    height: '0',
-    paddingBottom:'20%',
+    paddingBottom:'1rem',
     backgroundSize: '100%'
 }
 
@@ -22,16 +20,9 @@ const FeatureFlagComponent = ({...props}) => {
 
     return (
         <section id="features">
-            <div className="container" id="feature-container">
-            <header>
-                <h2>
-                <strong>
-                    {"Feature Flag Example: " + isFeatureEnabled}
-                </strong>
-                </h2>
-            </header>
+
             {isFeatureEnabled &&
-                <div className="container"
+                <div
                      id="feature-flag"
                      onClick={() => addEvent(optimizelyClient, userId)} style={featureFlagStyle}>
 
@@ -40,7 +31,6 @@ const FeatureFlagComponent = ({...props}) => {
                          alt="feature-flag" />
                 </div>
             }
-        </div>
       </section>
     )
 }
