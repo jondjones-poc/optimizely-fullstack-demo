@@ -8,7 +8,7 @@ import { fetchContentfulEntries } from '../utils/contentfulConnector';
 import ContentRecommendations from '../component/ContentRecommendations'
 import VariationContainerRenderer from '../component/VariationContainerRenderer';
 
-const Home = (props) => {
+const News = (props) => {
 
     const { fields, datafile, contentfulDatafile } = props;
 
@@ -46,6 +46,11 @@ const Home = (props) => {
                 <div className="container">
                     <div className="row">
                         <div id="content" className="col-8 col-12-medium imp-medium">
+
+                            <div id="header-large">
+                                News and Stories
+                            </div>
+
                             {fields.map((item, index) =>
                                 <VariationContainerRenderer
                                     key={index}
@@ -90,4 +95,4 @@ export async function getStaticProps() {
 
 }
 
-export default Home;
+export default News;

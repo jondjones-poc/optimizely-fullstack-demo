@@ -9,10 +9,10 @@ export default function TopHeader() {
                 path: "/"
             },
             {   name: "Latest Deals",
-                path: "/landing"
+                path: "/plp"
             },
             {   name: "News",
-                path: "/cms"
+                path: "/news"
             },
             {   name: "Sign-up",
                 path: "/signup"

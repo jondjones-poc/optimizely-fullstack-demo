@@ -20,6 +20,8 @@ export default function Landing({...props}) {
 
   const [ componentMessage, setComponentMessage ] = useState();
   const [ discountAmount, setDiscountAmount ] = useState();
+  const [ categoryFilterVersion, setCategoryFilterVersion ] = useState();
+  const [ sizeFilterVersion, setSizeFilterVersion ] = useState();
 
   const optimizelyClient = createInstance({
     datafile: datafile,
@@ -27,9 +29,9 @@ export default function Landing({...props}) {
 
   const router = useRouter()
   const { segment = '' } = router.query
-  console.log('segment', segment)
-
   const userId = getUserId(router);
+
+  console.log('Segments', segment)
 
   let optimizelyUserContext;
 
@@ -46,21 +48,41 @@ export default function Landing({...props}) {
   useEffect(() => {
       optimizelyClient.onReady().then(() => {
 
-        const decision  = optimizelyUserContext.decide('personalisation');
-        console.log('personalisation-flag', decision);
+        const personalisationDecision  = optimizelyUserContext.decide('personalisation');
+        console.log('personalisationDecision', personalisationDecision);
 
-        const componentMessage = decision.variables.component_message;
-        const discountAmount = decision.variables.discount_amount;
+        const componentMessage = personalisationDecision.variables.component_message;
+        const discountAmount = personalisationDecision.variables.discount_amount;
+
+        const filtertestDecision  = optimizelyUserContext.decide('plp_-_filter_tests');
+        console.log('plp_-_filter_tests', filtertestDecision);
+
+        const categoryFilterVersion = filtertestDecision.variables.category_filter_version;
+        const sizeFilterVersion = filtertestDecision.variables.size_filter_version;
 
         if (discountAmount && discountAmount >= 0) {
           setDiscountAmount(discountAmount);
         }
 
+        setCategoryFilterVersion(categoryFilterVersion);
+        setSizeFilterVersion(sizeFilterVersion);
         setComponentMessage(componentMessage);
       });
   }, [optimizelyUserContext, optimizelyClient]);
 
   console.log(discountAmount)
+
+
+  const handleClick = (e) => {
+      const url = e.target["src"].toString();
+
+      if(url.includes('filter-size-2') && !url.includes('filter-size-2-a')) {
+        e.target["src"] = 'images/filter-size-2-a.png';
+      } else if (url.includes('filter-size-2') && url.includes('filter-size-2-a')){
+        e.target["src"] = 'images/filter-size-2.png';
+      }
+  };
+
   return (
     <>
       <DiscountBanner discount={discountAmount}
@@ -72,28 +94,48 @@ export default function Landing({...props}) {
               <div id="sidebar" className="col-3 col-12-medium">
 
                 <div>
-                  <img src="images/filter-1.png" alt="Filter 1" style={imageStyle} />
+                  <img src={`images/filter-cat-${categoryFilterVersion}.png`} alt="Category Filter" style={imageStyle} />
 							  </div>
                 <div>
-                  <img src="images/filter-2.png" alt="Filter 2" style={imageStyle} />
+                  <img src={`images/filter-size-${sizeFilterVersion}.png`} alt="Size Filter" style={imageStyle} onClick={(e) => handleClick(e)} />
 							  </div>
                 <div>
-                  <Link href="/landing?segment=vip">
+                  <div id="header-sidebar">
+                    Segments
+                  </div>
+                  <Link href="/plp?segment=vip">
                     <a>
-                      <img src="images/filter-3-1.png" alt="Filter 3" style={imageStyle} />
+                      <p className="tag">VIP</p>
                     </a>
                   </Link>
-                  <Link href="/landing?segment=new">
+                  <Link href="/plp?segment=new">
                     <a>
-                    <img src="images/filter-3-2.png" alt="Filter 3" style={imageStyle} />
+                      <p className="tag">NEW</p>
                     </a>
                   </Link>
-                  <Link href="/landing?segment=premier">
+                  <Link href="/plp?segment=premier">
                     <a>
-                      <img src="images/filter-3-3.png" alt="Filter 3" style={imageStyle} />
+                    <p className="tag">PREMIER</p>
                     </a>
                   </Link>
-
+                  <div id="header-sidebar">
+                    Users
+                   </div>
+                  <Link href="/plp?id=1">
+                    <a>
+                      <p className="tag">User One</p>
+                    </a>
+                  </Link>
+                  <Link href="/plp?id=2">
+                    <a>
+                      <p className="tag">User Two</p>
+                    </a>
+                  </Link>
+                  <Link href="/plp?id=3">
+                    <a>
+                    <p className="tag">User Three</p>
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div id="content" className="col-9 col-12-medium imp-medium">
