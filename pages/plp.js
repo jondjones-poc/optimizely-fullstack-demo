@@ -70,9 +70,6 @@ export default function Landing({...props}) {
       });
   }, [optimizelyUserContext, optimizelyClient]);
 
-  console.log(discountAmount)
-
-
   const handleClick = (e) => {
       const url = e.target["src"].toString();
 
