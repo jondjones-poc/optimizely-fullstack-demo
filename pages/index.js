@@ -54,7 +54,7 @@ export default function Home({...props}) {
       setBannerText(abTestFlag.variables.button_text);
       setButtonUrl(abTestFlag.variables.button_url);
 
-      /// Multi-arm bandit code
+      /// Multi-arm bandit
       const apiDataJson = optimizelyClient.getFeatureVariable('multi-arm_bandit', 'api_data', userId);
       const apiUrl = apiDataJson?.url;
 
