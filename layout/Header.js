@@ -16,11 +16,9 @@ const Header = ({...props}) => {
     return (
         <section id="header" style={sectionStyle}>
             <Link href="/">
-                <a>
                     <img src={`images/${clientId}/header.png`}
                          style={{width: '100%'}}
                          alt="Header" />
-                </a>
             </Link>
         </section>
     )

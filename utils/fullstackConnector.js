@@ -2,10 +2,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 export async function getDataFile(sdkKey = process.env.NEXT_PUBLIC_SDK_KEY) {
 
-    const dataFileUrl = `https://cdn.optimizely.com/datafiles/${sdkKey}.json`;
+  console.log(sdkKey)
+    const dataFileUrl = `https://cdn.optimizely.com/datafiles/CPCdyJVM8Xe4sBDNjot53.json`;
 
     const response = await fetch(dataFileUrl);
+    console.log(response);
     const dataFile = await response.json();
+
+
 
     return dataFile;
 }

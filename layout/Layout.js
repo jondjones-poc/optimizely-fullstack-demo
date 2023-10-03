@@ -15,9 +15,6 @@ const Layout = ({children, clientId, ...props}) => {
     return (
         <>
             <Head>
-                <title>Optimizely Demo</title>
-                <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,600,600i" rel="stylesheet" />
-                <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
 
 
             </Head>

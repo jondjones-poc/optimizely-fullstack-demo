@@ -33,7 +33,7 @@ export default function TopHeader() {
                     {navLinks.map((link, index) => {
                         return (
                             <Link key={index} href={link.path}>
-                                <a>{link.name}</a>
+                                {link.name}
                             </Link>
                         );
                     })}

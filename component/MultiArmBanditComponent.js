@@ -13,13 +13,7 @@ const MultiArmBanditComponent = ({...props}) => {
     return (
         <div className="container">
               <div id="multi-arm-bandit" style={{width: '100%'}}>
-                <Link href="/">
-                  <a onClick={() => bannerClicked(optimizelyClient)}>
-                    <img src={`images/${clientId}/${postId}.png`}
-                         style={{width: '100%'}}
-                         alt="multi-arm bandit" />
-                  </a>
-                </Link>
+
               </div>
         </div>
     )

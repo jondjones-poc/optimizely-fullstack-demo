@@ -101,37 +101,25 @@ export default function Landing({...props}) {
                     Segments
                   </div>
                   <Link href="/plp?segment=vip">
-                    <a>
                       <p className="tag">VIP</p>
-                    </a>
                   </Link>
                   <Link href="/plp?segment=new">
-                    <a>
                       <p className="tag">NEW</p>
-                    </a>
                   </Link>
                   <Link href="/plp?segment=premier">
-                    <a>
                     <p className="tag">PREMIER</p>
-                    </a>
                   </Link>
                   <div id="header-sidebar">
                     Users
                    </div>
                   <Link href="/plp?id=1">
-                    <a>
                       <p className="tag">User One</p>
-                    </a>
                   </Link>
                   <Link href="/plp?id=2">
-                    <a>
                       <p className="tag">User Two</p>
-                    </a>
                   </Link>
                   <Link href="/plp?id=3">
-                    <a>
                     <p className="tag">User Three</p>
-                    </a>
                   </Link>
                 </div>
               </div>
@@ -144,7 +132,6 @@ export default function Landing({...props}) {
                         </a>
                         <p><img src={`images/landing1.png`} alt="Item 1" /></p>
                       </section>
-
                   </div>
                   <div className="col-4 col-6-medium col-12-small">
 
