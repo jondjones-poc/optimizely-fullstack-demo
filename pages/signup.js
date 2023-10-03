@@ -3,7 +3,7 @@ import { createInstance } from "@optimizely/optimizely-sdk";
 
 import { getDataFile, getFeatureFlagStatus } from "../utils/fullstackConnector";
 
-import MapContainer from "../component/MapContainer";
+
 import PersonalizedForm from "../component/PersonalizedForm";
 
 import styles from '../styles/signup.module.css';
@@ -49,10 +49,10 @@ const Signup = (props) => {
     return (
 
         <>
-            {displayMap ?
+            {/* {displayMap ?
                 <MapContainer mapCords={mapCords} address={address} featureDecisionData={featureDecisionData} />
                 : null
-            }
+            } */}
             <section id="main" className={`${styles.mainContainer}`}>
                 <div className={`container ${styles.signUpContainer}`}>
                     <div className="row">

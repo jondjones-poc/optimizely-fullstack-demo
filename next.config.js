@@ -1,11 +1,4 @@
 const path = require('path')
-const withSass = require('@zeit/next-sass');
-
-module.exports = withSass({
-  cssModules: true,
-  reactStrictMode: true,
-  distDir: 'build',
-})
 
 module.exports = {
   sassOptions: {
@@ -13,5 +6,8 @@ module.exports = {
   },
   images: {
     domains: ['localhost', 'optimizely-demo.netlify.app'],
+  },
+  experimental: {
+    appDir: true,
   }
 }
