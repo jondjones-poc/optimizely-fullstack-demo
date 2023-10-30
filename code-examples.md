@@ -1,35 +1,43 @@
+### Datafile via SDK Key
+
+```javascript
 import { createInstance } from "@optimizely/optimizely-sdk";
-
-
-// Datafil
 const optimizelyClient = createInstance({
     sdkKey: sdkKey,
 });
+```
 
+### Call datafile and pass in the JSON directly
 
+```javascript
 const datafile = await fetch(`https://cdn.optimizely.com/datafiles/${sdkKey}.json`);
 const optimizelyClient = createInstance({
     datafile: datafile,
     datafileOptions: {
         autoUpdate: true,
-        updateInterval: 600000, // 10 minutes in milliseconds
+        updateInterval: 600000,
       },
 });
+```
 
+### Assigning a user
 
-// Assigning a user
+```javascript
 optimizelyClient.onReady().then(() => {
-    optimizelyUserContext = optimizelyClient.createUserContext(
-      userId,
-      {
-        segment: segment,
-        user: segment
-      }
-    );
-  });
+  optimizelyUserContext = optimizelyClient.createUserContext(
+    userId,
+    {
+      utc_campaign: "utc-param",
+      segment: "my-param",
+      user: "value",
+    }
+  );
+});
+```
 
+### Bucketing example
 
-// Bucketing example
+```javascript
 useEffect(() => {
     optimizelyClient.onReady().then(() => {
 
@@ -39,9 +47,12 @@ useEffect(() => {
       const discountAmount = decision.variables.discount_amount;
     });
 }, []);
+```
 
+### Log an event
 
-// Log an event
+```javascript
 const activateUser = (componentName) => {
-    optimizelyClient.track('banner_click', componentName);
+  optimizelyClient.track('banner_click', componentName);
 };
+```

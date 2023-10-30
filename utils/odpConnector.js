@@ -31,8 +31,7 @@ export async function updateOdpProfileData(email, location) {
   const data = {
     attributes: {
       email: email,
-      requested_sales_pack: "true",
-      job_title: "Marketing"
+      requested_sales_pack: true,
     }
   };
 

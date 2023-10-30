@@ -1,15 +1,12 @@
 {
   "name": "optimizely-fullstack-demo",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "install-api": "netlify-lambda install",
-    "start-api": "netlify-lambda serve functions",
-    "build-api": "netlify-lambda build functions"
+    "lint": "next lint"
   },
   "dependencies": {
     "@babel/core": "^7.23.0",
@@ -17,7 +14,8 @@
     "@contentful/rich-text-html-renderer": "^16.2.0",
     "@netlify/next": "^1.4.9",
     "@optimizely/js-sdk-logging": "^0.3.1",
-    "@optimizely/optimizely-sdk": "^4.9.4",
+    "@optimizely/optimizely-sdk": "^4.10.0",
+    "@optimizely/react-sdk": "^2.9.2",
     "autoprefixer": "^10.4.16",
     "axios": "^1.5.1",
     "babel-loader": "^9.1.3",
@@ -26,7 +24,6 @@
     "contentful": "^10.6.1",
     "cookie": "^0.5.0",
     "js-cookie": "^3.0.5",
-    "next": "^13.4.7",
     "postcss-easy-import": "^4.0.0",
     "postcss-loader": "^7.3.3",
     "react": "^18.2.0",
@@ -36,10 +33,12 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^4.37.4",
     "eslint": "8.50.0",
     "eslint-config-next": "13.5.4",
     "eslint-import-resolver-babel-module": "^5.3.2",
     "eslint-plugin-import": "^2.28.1",
+    "next": "13.4.9",
     "sass": "^1.68.0"
   }
 }

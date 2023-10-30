@@ -31,19 +31,15 @@ npm run start-api
 
 The API will load on `http://localhost:9000/admin`
 
-
 Click this button to create a new Github repo, new Netlify project and deploy this example yourself
 
 [![Deploy to Netlify Button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jondjones-poc/Fullstack-demo)
 
-## Useful Documentation 📄
-
-**SDK**
+## SDK Documentation 📄
 
 - [JavaScript (Browser) SDK](https://docs.developers.optimizely.com/full-stack/docs/javascript-sdk)
-
+- [React SDK](https://docs.developers.optimizely.com/full-stack-experimentation/docs/javascript-react-sdk)
 - [JavaScript (Node) SDK](https://docs.developers.optimizely.com/full-stack/docs/javascript-node-sdk)
-
 - [@optimizely/optimizely-sdk](https://www.npmjs.com/package/@optimizely/optimizely-sdk)
 
 **Metrics**

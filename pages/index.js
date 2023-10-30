@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { createInstance } from "@optimizely/optimizely-sdk";
 import { useRouter } from 'next/router'
-import { getDataFile, getUserId } from "../utils/fullstackConnector";
+import { getOptimizelyProjectsDataFile, getUserId } from "../utils/optimizelyConnector";
 
-import ABComponent from "../component/ABComponent";
+import Banner from "../component/Banner";
 import FeatureFlagComponent from "../component/FeatureFlagComponent";
-import MultiArmBanditComponent from "../component/MultiArmBanditComponent";
 
 export default function Home({...props}) {
 
@@ -16,7 +15,6 @@ export default function Home({...props}) {
   let [ componentTitle, setComponentTitle ] = useState('');
   let [ bannerText, setBannerText ] = useState('');
   let [ buttonUrl, setButtonUrl ] = useState('');
-  let [ postData, setPostData ] = useState({});
 
   const optimizelyClient = createInstance({
     datafile: datafile,
@@ -49,21 +47,11 @@ export default function Home({...props}) {
       // AB Testing Code
       const abTestFlag = optimizelyUserContext.decide('ab_test');
       console.log('abTest', abTestFlag);
+
       setBackgroundColor(abTestFlag.variables.backgroundcolour);
       setComponentTitle(abTestFlag.variables.component_title);
       setBannerText(abTestFlag.variables.button_text);
       setButtonUrl(abTestFlag.variables.button_url);
-
-      /// Multi-arm bandit
-      const apiDataJson = optimizelyClient.getFeatureVariable('multi-arm_bandit', 'api_data', userId);
-      const apiUrl = apiDataJson?.url;
-
-      const fetchData = async () => {
-        const response = await fetch(apiUrl);
-        const json = await response.json();
-        setPostData(json);
-      }
-      fetchData().catch(console.error);
     });
   }, []);
 
@@ -77,7 +65,7 @@ export default function Home({...props}) {
       <section id="main">
 
         {componentTitle &&
-          <ABComponent  key={`${componentTitle}${backgroundColor}`}
+          <Banner key={`${componentTitle}${backgroundColor}`}
                         userId={userId}
                         optimizelyClient={optimizelyClient}
                         backgroundColor={backgroundColor}
@@ -86,12 +74,6 @@ export default function Home({...props}) {
                         buttonUrl={buttonUrl} />
         }
 
-        <MultiArmBanditComponent  key={postData.id}
-                                  userId={userId}
-                                  optimizelyClient={optimizelyClient}
-                                  clientId={clientId}
-                                  postId={postData.id}
-                                  title={postData.title} />
       </section>
     </>
   )
@@ -99,7 +81,7 @@ export default function Home({...props}) {
 
 export async function getServerSideProps() {
 
-  const datafile = await getDataFile();
+  let datafile = await getOptimizelyProjectsDataFile();
 
   return {
     props: {

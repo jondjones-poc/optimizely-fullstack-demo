@@ -14,11 +14,6 @@ const Layout = ({children, clientId, ...props}) => {
 
     return (
         <>
-            <Head>
-
-
-            </Head>
-
             <style dangerouslySetInnerHTML={{ __html: props.stylesheet }} />
 
             <div id="page-wrapper">

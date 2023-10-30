@@ -1,5 +1,4 @@
-import React from 'react'
-import styles from '../styles/ABComponent.module.css'
+import styles from '../styles/Banner.module.css'
 
 const sectionStyle = (backgroundColor) => (
 {
@@ -16,7 +15,7 @@ const sectionStyle = (backgroundColor) => (
     textAlign: `center`,
 });
 
-const ABComponent = ({...props}) => {
+const Banner = ({...props}) => {
 
     const { backgroundColor, bannerText, buttonUrl } = props;
 
@@ -34,7 +33,7 @@ const ABComponent = ({...props}) => {
                 </div>
 
                 <a className={styles.btnBgstroke} href={buttonUrl} >
-                    Buy now
+                    Learn More
                 </a>
 
             </div>
@@ -42,9 +41,4 @@ const ABComponent = ({...props}) => {
     )
 }
 
-export default ABComponent;
-
-
-
-
-
+export default Banner;

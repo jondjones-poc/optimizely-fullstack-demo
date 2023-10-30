@@ -1,17 +1,27 @@
 import { v4 as uuidv4 } from 'uuid';
+import file from '../data/datafile.json';
 
-export async function getDataFile(sdkKey = process.env.NEXT_PUBLIC_SDK_KEY) {
+export async function getOptimizelyProjectsDataFile() {
 
-  console.log(sdkKey)
-    const dataFileUrl = `https://cdn.optimizely.com/datafiles/CPCdyJVM8Xe4sBDNjot53.json`;
+    if (process.env.NEXT_PUBLIC_USE_LOCAL_DATAFILE) {
+      return file;
+    }
 
+    const dataFileUrl = `https://cdn.optimizely.com/datafiles/${process.env.NEXT_PUBLIC_OPTIMIZELY_SDK_KEY}.json`;
     const response = await fetch(dataFileUrl);
-    console.log(response);
     const dataFile = await response.json();
 
-
-
     return dataFile;
+}
+
+export async function getContentfulProjectsDataFile() {
+
+  const dataFileUrl = `https://cdn.optimizely.com/datafiles/${process.env.NEXT_PUBLIC_OPTIMIZELY_SDK_KEY_CONTENTFUL_PROJECT}.json`;
+
+  const response = await fetch(dataFileUrl);
+  const dataFile = await response.json();
+
+  return dataFile;
 }
 
 export async function getFeatureFlagStatus(optimizelyClient, userId, attributes, flagName) {

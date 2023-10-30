@@ -3,17 +3,30 @@ import { fetchContentfulEntry } from '../utils/contentfulConnector';
 
 const VariationContainerRenderer = ({...props}) => {
 
-    let [ variationItem, setVariationContent ] = useState('');
+    let [ contentFieldData, setContentFieldData ] = useState('');
+
+    console.log('VariationContainerRenderer props', props)
 
     const { item, variationId, userId, optimizelyClient } = props;
-    const { content } = item;
+    const { title, content } = item;
+
+    // This is the Contentful ID of the content property we want to render
+    if (!variationId) {
+        console.log('MISSING VARIATION ID');
+    }
 
     const entityId = content?.fields?.meta[variationId];
+    if (!entityId) {
+        console.log('MISSING EVENT ID');
+    }
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await fetchContentfulEntry(entityId);
-            setVariationContent(result);
+
+            const contentFieldData = await fetchContentfulEntry(entityId);
+            console.log('Contentful content prop data', contentFieldData);
+
+            setContentFieldData(contentFieldData);
           }
           fetchData().catch(console.error);
     }, [entityId]);
@@ -27,15 +40,15 @@ const VariationContainerRenderer = ({...props}) => {
         <article className="box post">
             <header>
                 <h2>
-                    {variationItem.title}
+                    {title}
                 </h2>
             </header>
 
             <a href="#" className="image featured">
-                <img src={variationItem?.heroImage?.fields.file.url} alt={item.slug} />
+                <img src={contentFieldData?.heroImage?.fields.file.url} alt={item.slug} />
             </a>
 
-            <div className="header" dangerouslySetInnerHTML={{ __html: variationItem.content }} />
+            <div className="header" dangerouslySetInnerHTML={{ __html: contentFieldData?.content }} />
 
             <ul className="actions" >
                 <li>

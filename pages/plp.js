@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
-import Link from "next/link";
-import { getDataFile, getUserId } from "../utils/fullstackConnector";
+import { getOptimizelyProjectsDataFile, getUserId } from "../utils/optimizelyConnector";
 import { createInstance } from "@optimizely/optimizely-sdk";
-
-import DiscountBanner from "../component/DiscountBanner";
+import BannerForPlpFilter from "../component/BannerForPlpFilter";
+import BannerForPlpSegments from "../component/BannerForPlpSegments";
 
 const imageStyle = {
   width: '100%'
@@ -20,27 +19,32 @@ export default function Landing({...props}) {
 
   const [ componentMessage, setComponentMessage ] = useState();
   const [ discountAmount, setDiscountAmount ] = useState();
-  const [ categoryFilterVersion, setCategoryFilterVersion ] = useState();
-  const [ sizeFilterVersion, setSizeFilterVersion ] = useState();
+  const [ categoryFilterVersion, setCategoryFilterVersion ] = useState(0);
+  const [ sizeFilterVersion, setSizeFilterVersion ] = useState(0);
 
   const optimizelyClient = createInstance({
     datafile: datafile,
   });
 
   const router = useRouter()
-  const { segment = '' } = router.query
-  const userId = getUserId(router);
-
+  const { segment = '', utc_campaign = '', algorithm = '' } = router.query
   console.log('Segments', segment)
+  console.log('UTC campaign', utc_campaign)
 
+  // Demo of setting IDS to variations, useful for integration testing
+  const userId = algorithm || getUserId(router);
   let optimizelyUserContext;
 
   optimizelyClient.onReady().then(() => {
     optimizelyUserContext = optimizelyClient.createUserContext(
       userId,
+
+      // Passing attributes for personalization
       {
+        algorithm: algorithm,
         segment: segment,
-        user: segment
+        user: segment,
+        utc_campaign: utc_campaign
       }
     );
   });
@@ -70,23 +74,17 @@ export default function Landing({...props}) {
       });
   }, [optimizelyUserContext, optimizelyClient]);
 
-  const handleClick = (e) => {
-      const url = e.target["src"].toString();
-
-      if(url.includes('filter-size-2') && !url.includes('filter-size-2-a')) {
-        e.target["src"] = 'images/filter-size-2-a.png';
-      } else if (url.includes('filter-size-2') && url.includes('filter-size-2-a')){
-        e.target["src"] = 'images/filter-size-2.png';
-      }
-  };
-
   return (
     <>
-      <DiscountBanner discount={discountAmount}
-                      componentMessage={componentMessage} />
+
 
       <section id="feature" style={featureStyle}>
         <div className="container">
+
+            <BannerForPlpFilter />
+
+            <BannerForPlpSegments discount={discountAmount} componentMessage={componentMessage} />
+
 						<div className="row">
               <div id="sidebar" className="col-3 col-12-medium">
 
@@ -94,34 +92,8 @@ export default function Landing({...props}) {
                   <img src={`images/filter-cat-${categoryFilterVersion}.png`} alt="Category Filter" style={imageStyle} />
 							  </div>
                 <div>
-                  <img src={`images/filter-size-${sizeFilterVersion}.png`} alt="Size Filter" style={imageStyle} onClick={(e) => handleClick(e)} />
+                  <img src={`images/filter-size-${sizeFilterVersion}.png`} alt="Size Filter" style={imageStyle} />
 							  </div>
-                <div>
-                  <div id="header-sidebar">
-                    Segments
-                  </div>
-                  <Link href="/plp?segment=vip">
-                      <p className="tag">VIP</p>
-                  </Link>
-                  <Link href="/plp?segment=new">
-                      <p className="tag">NEW</p>
-                  </Link>
-                  <Link href="/plp?segment=premier">
-                    <p className="tag">PREMIER</p>
-                  </Link>
-                  <div id="header-sidebar">
-                    Users
-                   </div>
-                  <Link href="/plp?id=1">
-                      <p className="tag">User One</p>
-                  </Link>
-                  <Link href="/plp?id=2">
-                      <p className="tag">User Two</p>
-                  </Link>
-                  <Link href="/plp?id=3">
-                    <p className="tag">User Three</p>
-                  </Link>
-                </div>
               </div>
               <div id="content" className="col-9 col-12-medium imp-medium">
                 <div className="row">
@@ -134,14 +106,12 @@ export default function Landing({...props}) {
                       </section>
                   </div>
                   <div className="col-4 col-6-medium col-12-small">
-
                       <section>
                         <a href="#" className="image featured">
                           <img src={`images/${clientId}/item.png`} alt="Item 2" />
                         </a>
                         <p><img src={`images/landing2.png`} alt="Item 2" /></p>
                       </section>
-
                   </div>
                   <div className="col-4 col-6-medium col-12-small">
                       <section>
@@ -162,7 +132,7 @@ export default function Landing({...props}) {
 
 export async function getServerSideProps(context) {
 
-  const datafile = await getDataFile();
+  const datafile = await getOptimizelyProjectsDataFile();
 
   return {
     props: {

@@ -1,9 +1,6 @@
 [build]
 command = "npm run build"
 
-[build.environment]
-NEXT_USE_NETLIFY_EDGE = "true"
-
 [[plugins]]
 package = "@netlify/plugin-nextjs"
 
@@ -11,7 +8,4 @@ package = "@netlify/plugin-nextjs"
 for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
-    X-Frame-Options = "SAMEORIGIN"
-    X-XSS-Protection = "0"
-    X-Content-Type-Options = "nosniff"
-    Content-Security-Policy = "default-src 'self'; style-src 'self'; form-action 'self'; script-src 'self'; connect-src 'self'; img-src 'self'; base-uri 'self';"
+    Content-Security-Policy = "default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';"

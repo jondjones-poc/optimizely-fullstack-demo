@@ -1,4 +1,4 @@
-import React from 'react'
+import Image from 'next/image';
 
 const featureFlagStyle = {
     width: '100%',
@@ -26,9 +26,10 @@ const FeatureFlagComponent = ({...props}) => {
                      id="feature-flag"
                      onClick={() => addEvent(optimizelyClient, userId)} style={featureFlagStyle}>
 
-                    <img src={`images/${clientId}/feature.png`}
-                         style={{width: '100%'}}
-                         alt="feature-flag" />
+                    <Image src={`/images/${clientId}/feature.png`}
+                        width="1200"
+                        height="400"
+                        alt="feature-flag" />
                 </div>
             }
       </section>

@@ -1,0 +1,86 @@
+
+.blueBackground {
+  background-color: #cecdd6 !important;
+  border-radius: 1.5rem;
+  padding: 0;
+}
+
+.reset {
+  padding: 0;
+}
+
+.signUpContainer {
+  padding-bottom: 1rem;
+  margin-top: 6rem;
+}
+
+.container {
+  align-items: stretch;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+}
+
+.formContainer {
+  background-color: #f6f6f6;
+  border-radius: 1.5rem;
+  padding: 1rem;
+  text-align: center;
+  margin: 1rem;
+}
+
+.formTitle {
+  font-family: TT Commons,Arial,sans-serif;
+  font-weight: 600;
+  color: black;
+  text-transform: unset;
+  margin-top: 1rem;
+  line-height: 1.4rem;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.textContainer {
+  font-size: 2rem;
+  line-height: 5rem;
+  text-transform: capitalize;
+}
+
+.hidden {
+  display: none;
+}
+
+.display {
+  display: block;
+}
+
+.signupBtn {
+  padding-top: 1rem;
+  text-align: 'center';
+  margin: 1rem;
+  color: white;
+  width: 90%;
+  text-align: center;
+  --border-radius: 2.2rem;
+  padding: 1rem 3rem 1rem 2.4rem;
+  margin-bottom: 0.3rem;
+  color: --white;
+  background-color: #0037ff;;
+  border: none;
+  border-radius: 1rem;
+  font-weight: 400;
+  overflow: hidden;
+}
+
+.contentArea {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  font-family: TT Commons,Arial,sans-serif;
+  font-weight: 300;
+  font-size: 0.6rem;
+  line-height: 1.3rem;
+  position: relative;
+  color: black;
+  text-align: left;
+  margin-left: 1rem;
+}
