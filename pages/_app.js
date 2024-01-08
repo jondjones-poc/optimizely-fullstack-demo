@@ -7,6 +7,7 @@ function MyApp({ Component, pageProps, props}) {
 
   const { clientId } = props;
   console.log('clientId', props)
+  
   return (<>
             <TopHeader />
 

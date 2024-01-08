@@ -13,7 +13,7 @@ const featureStyle = {
   paddingBottom: '5rem'
 };
 
-export default function Landing({...props}) {
+export default function ProductListingPage({...props}) {
 
   const { datafile, clientId } = props;
 
