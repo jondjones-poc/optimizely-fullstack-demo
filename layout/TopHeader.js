@@ -9,15 +9,15 @@ export default function TopHeader() {
                 path: "/"
             },
             {
-                name: "Landing Page",
-                path: "/landingpage"
-            },
-            {
-                name: "Latest Products",
+                name: "Segmentation Examples",
                 path: "/plp"
             },
-            {   name: "News",
+            {   name: "Content Examples",
                 path: "/news"
+            },
+            {
+                name: "Landing Page",
+                path: "/landingpage"
             },
             {   name: "Code",
                 path: "https://github.com/jondjones-poc/optimizely-fullstack-demo"
