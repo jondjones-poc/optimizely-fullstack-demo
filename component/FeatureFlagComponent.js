@@ -26,7 +26,7 @@ const FeatureFlagComponent = ({...props}) => {
                      id="feature-flag"
                      onClick={() => addEvent(optimizelyClient, userId)} style={featureFlagStyle}>
 
-                    <Image src={`/images/${clientId}/feature.png`}
+                    <Image src={`/demo/${clientId}/feature.png`}
                         width="1200"
                         height="400"
                         alt="feature-flag" />

@@ -12,7 +12,7 @@ const Footer = ({clientId}) => {
     return (
         <section id="footer" style={sectionStyle}>
 
-            <img src={`images/${clientId}/footer.png`}
+            <img src={`demo/${clientId}/footer.png`}
                  style={{width: '100%'}}
                  alt="Footer" />
 

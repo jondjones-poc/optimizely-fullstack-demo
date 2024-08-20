@@ -100,7 +100,7 @@ export default function ProductListingPage({...props}) {
                   <div className="col-4 col-6-medium col-12-small">
                       <section>
                         <a href="#" className="image featured">
-                          <img src={`images/${clientId}/item.png`} alt="Item 1" />
+                          <img src={`demo/${clientId}/item.png`} alt="Item 1" />
                         </a>
                         <p><img src={`images/landing1.png`} alt="Item 1" /></p>
                       </section>
@@ -108,7 +108,7 @@ export default function ProductListingPage({...props}) {
                   <div className="col-4 col-6-medium col-12-small">
                       <section>
                         <a href="#" className="image featured">
-                          <img src={`images/${clientId}/item.png`} alt="Item 2" />
+                          <img src={`demo/${clientId}/item.png`} alt="Item 2" />
                         </a>
                         <p><img src={`images/landing2.png`} alt="Item 2" /></p>
                       </section>
@@ -116,7 +116,7 @@ export default function ProductListingPage({...props}) {
                   <div className="col-4 col-6-medium col-12-small">
                       <section>
                         <a href="#" className="image featured">
-                          <img src={`images/${clientId}/item.png`} alt="Item 3" />
+                          <img src={`demo/${clientId}/item.png`} alt="Item 3" />
                         </a>
                         <p><img src={`images/landing3.png`} alt="Item 3" /></p>
                       </section>
