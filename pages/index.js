@@ -5,12 +5,14 @@ import { getOptimizelyProjectsDataFile, getUserId } from "../utils/optimizelyCon
 
 import Banner from "../component/Banner";
 import FeatureFlagComponent from "../component/FeatureFlagComponent";
+import RemoteControlComponent  from "../component/RemoteControlComponent";
 
 export default function Home({...props}) {
 
   const { datafile, clientId } = props;
 
   let [ isFeatureEnabled, renderIsFeatureEnabled ] = useState(false);
+  let [ promotionalMessage, setPromotionalMessage ] = useState('');
   let [ backgroundColor, setBackgroundColor ] = useState('');
   let [ componentTitle, setComponentTitle ] = useState('');
   let [ bannerText, setBannerText ] = useState('');
@@ -44,6 +46,10 @@ export default function Home({...props}) {
       console.log('featureFlag', featureFlag);
       renderIsFeatureEnabled(featureFlag.enabled);
 
+      const remoteControl = optimizelyUserContext.decide('1_homepage_-_remote_control');
+      console.log('remote_control', remoteControl);
+      setPromotionalMessage(remoteControl.variables.promotionMessage);
+
       // AB Testing Code
       const abTestFlag = optimizelyUserContext.decide('ab_test');
       console.log('abTest', abTestFlag);
@@ -63,6 +69,12 @@ export default function Home({...props}) {
                             isFeatureEnabled={isFeatureEnabled} />
 
       <section id="main">
+
+      {promotionalMessage &&
+          <RemoteControlComponent
+                        promotionMessage={promotionalMessage} />
+        }
+
 
         {componentTitle &&
           <Banner key={`${componentTitle}${backgroundColor}`}
