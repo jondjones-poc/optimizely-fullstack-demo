@@ -3,7 +3,9 @@ import file from '../data/datafile.json';
 
 export async function getOptimizelyProjectsDataFile() {
 
-    if (process.env.NEXT_PUBLIC_USE_LOCAL_DATAFILE) {
+
+    if (process.env.NEXT_PUBLIC_USE_LOCAL_DATAFILE === true) {
+      console.log('Using Local Data File');
       return file;
     }
 
