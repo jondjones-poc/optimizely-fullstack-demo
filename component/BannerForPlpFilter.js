@@ -7,7 +7,7 @@ const BannerForPlpFilter = ({...props}) => {
         <div className={`row ${styles.plpFilter}`}>
             <ul className={`col-6 ${styles.tags}`} >
                 <li>
-                    <b className={`${styles.title}`}>Segment Example:</b>
+                    <b className={`${styles.title}`}>Banner Example:</b>
                 </li>
                 <li>
                     <Link href="/plp?utc_campaign=vip" className={`${styles.tag}`}>
@@ -24,16 +24,12 @@ const BannerForPlpFilter = ({...props}) => {
                         MARKETING BANNER
                     </Link>
                 </li>
-                <li>
-                    <Link href="/plp" className={`${styles.tag}`}>
-                        NORMAL
-                    </Link>
-                </li>
+
             </ul>
 
             <ul className={`col-6 ${styles.tags}`} >
                 <li >
-                    <b className={`${styles.title}`}>Algorithm Example:</b>
+                    <b className={`${styles.title}`}>Menu Example:</b>
                 </li>
                 <li>
                     <Link href="/plp?algorithm=1" className={`${styles.tag}`}>
@@ -52,7 +48,7 @@ const BannerForPlpFilter = ({...props}) => {
                 </li>
                 <li>
                     <Link href="/plp" className={`${styles.tag}`}>
-                        MENU 4
+                        NORMAL
                     </Link>
                 </li>
             </ul>

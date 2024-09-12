@@ -56,3 +56,15 @@ const activateUser = (componentName) => {
   optimizelyClient.track('banner_click', componentName);
 };
 ```
+
+## React SDK Examples
+
+- [Hook useDecision()](https://github.com/jondjones-poc/optimizely-fullstack-demo/blob/master/component/SubscribePage.js#L13)
+
+- [HOC via React SDK](https://github.com/jondjones-poc/optimizely-fullstack-demo/blob/master/pages/landingpage.js#L60)
+
+- [withOptimizely()](https://github.com/jondjones-poc/optimizely-fullstack-demo/blob/master/component/BannerForSubscribeMembers.js#L72)
+
+## Data File Examples
+
+- [Get Data via getServerSideProps()](https://github.com/jondjones-poc/optimizely-fullstack-demo/blob/master/pages/plp.js#L133)
