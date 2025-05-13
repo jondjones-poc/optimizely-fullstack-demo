@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import { getOptimizelyProjectsDataFile, getUserId } from "../utils/optimizelyConnector";
 import { createInstance } from "@optimizely/optimizely-sdk";
-import BannerForPlpFilter from "../component/BannerForPlpFilter";
-import BannerForPlpSegments from "../component/BannerForPlpSegments";
+import SegmentationAlgorithmFilter from "../component/SegmentationAlgorithmFilter";
 
 const imageStyle = {
   width: '100%'
@@ -13,12 +12,13 @@ const featureStyle = {
   paddingBottom: '5rem'
 };
 
+
+
 export default function ProductListingPage({...props}) {
 
-  const { datafile, clientId } = props;
+  const { datafile, clientId, imageExists } = props;
+  const imageFolder = imageExists ? clientId : 'default';
 
-  const [ componentMessage, setComponentMessage ] = useState();
-  const [ discountAmount, setDiscountAmount ] = useState();
   const [ categoryFilterVersion, setCategoryFilterVersion ] = useState(0);
   const [ sizeFilterVersion, setSizeFilterVersion ] = useState(0);
 
@@ -27,9 +27,8 @@ export default function ProductListingPage({...props}) {
   });
 
   const router = useRouter()
-  const { segment = '', utc_campaign = '', algorithm = '' } = router.query
-  console.log('Segments', segment)
-  console.log('UTC campaign', utc_campaign)
+  const { algorithm = '' } = router.query
+  console.log('imageExists', imageExists)
 
   // Demo of setting IDS to variations, useful for integration testing
   const userId = algorithm || getUserId(router);
@@ -41,22 +40,14 @@ export default function ProductListingPage({...props}) {
 
       // Passing attributes for personalization
       {
-        algorithm: algorithm,
-        segment: segment,
-        user: segment,
-        utc_campaign: utc_campaign
+        algorithm: algorithm
       }
     );
   });
 
+
   useEffect(() => {
       optimizelyClient.onReady().then(() => {
-
-        const personalisationDecision  = optimizelyUserContext.decide('personalisation');
-        console.log('personalisationDecision', personalisationDecision);
-
-        const componentMessage = personalisationDecision.variables.component_message;
-        const discountAmount = personalisationDecision.variables.discount_amount;
 
         const filtertestDecision  = optimizelyUserContext.decide('plp_-_filter_tests');
         console.log('plp_-_filter_tests', filtertestDecision);
@@ -64,13 +55,8 @@ export default function ProductListingPage({...props}) {
         const categoryFilterVersion = filtertestDecision.variables.category_filter_version;
         const sizeFilterVersion = filtertestDecision.variables.size_filter_version;
 
-        if (discountAmount && discountAmount >= 0) {
-          setDiscountAmount(discountAmount);
-        }
-
         setCategoryFilterVersion(categoryFilterVersion);
         setSizeFilterVersion(sizeFilterVersion);
-        setComponentMessage(componentMessage);
       });
   }, [optimizelyUserContext, optimizelyClient]);
 
@@ -81,9 +67,7 @@ export default function ProductListingPage({...props}) {
       <section id="feature" style={featureStyle}>
         <div className="container">
 
-            <BannerForPlpFilter />
-
-            <BannerForPlpSegments discount={discountAmount} componentMessage={componentMessage} />
+            <SegmentationAlgorithmFilter />
 
 						<div className="row">
               <div id="sidebar" className="col-3 col-12-medium">
@@ -100,7 +84,7 @@ export default function ProductListingPage({...props}) {
                   <div className="col-4 col-6-medium col-12-small">
                       <section>
                         <a href="#" className="image featured">
-                          <img src={`demo/${clientId}/item.png`} alt="Item 1" />
+                          <img src={`demo/${imageFolder}/item.png`} alt="Item 1" />
                         </a>
                         <p><img src={`images/landing1.png`} alt="Item 1" /></p>
                       </section>
@@ -108,7 +92,7 @@ export default function ProductListingPage({...props}) {
                   <div className="col-4 col-6-medium col-12-small">
                       <section>
                         <a href="#" className="image featured">
-                          <img src={`demo/${clientId}/item.png`} alt="Item 2" />
+                          <img src={`demo/${imageFolder}/item.png`} alt="Item 2" />
                         </a>
                         <p><img src={`images/landing2.png`} alt="Item 2" /></p>
                       </section>
@@ -116,7 +100,7 @@ export default function ProductListingPage({...props}) {
                   <div className="col-4 col-6-medium col-12-small">
                       <section>
                         <a href="#" className="image featured">
-                          <img src={`demo/${clientId}/item.png`} alt="Item 3" />
+                          <img src={`demo/${imageFolder}/item.png`} alt="Item 3" />
                         </a>
                         <p><img src={`images/landing3.png`} alt="Item 3" /></p>
                       </section>
@@ -130,13 +114,27 @@ export default function ProductListingPage({...props}) {
   )
 }
 
+
+
 export async function getServerSideProps(context) {
 
   const datafile = await getOptimizelyProjectsDataFile();
 
+  const isImageFound = async (imageName) => {
+    var result = await fetch(`https://optimizely-demo.netlify.app/demo/${imageName}/item.png`, {
+      method: "HEAD",
+    });
+
+    return result.status === 200
+  };
+
+  const userAgent = context.req.headers['client'] || null;
+  const imageExists = await isImageFound(userAgent);
+
   return {
     props: {
-      datafile
+      datafile,
+      imageExists
     }
   }
 }
