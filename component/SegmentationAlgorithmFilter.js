@@ -1,32 +1,10 @@
 import Link from "next/link";
-import styles from '../styles/BannerForPlpFilter.module.css'
+import styles from '../styles/SegmentationFilter.module.css'
 
-const BannerForPlpFilter = ({...props}) => {
+const SegmentationAlgorithmFilter = ({...props}) => {
 
     return (
         <div className={`row ${styles.plpFilter}`}>
-            <ul className={`col-6 ${styles.tags}`} >
-                <li>
-                    <b className={`${styles.title}`}>Banner Example:</b>
-                </li>
-                <li>
-                    <Link href="/plp?utc_campaign=vip" className={`${styles.tag}`}>
-                        VIP
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/plp?utc_campaign=new" className={`${styles.tag}`}>
-                        NEW
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/plp?utc_campaign=marketing" className={`${styles.tag}`}>
-                        MARKETING BANNER
-                    </Link>
-                </li>
-
-            </ul>
-
             <ul className={`col-6 ${styles.tags}`} >
                 <li >
                     <b className={`${styles.title}`}>Menu Example:</b>
@@ -56,4 +34,4 @@ const BannerForPlpFilter = ({...props}) => {
     )
 }
 
-export default BannerForPlpFilter;
+export default SegmentationAlgorithmFilter;
