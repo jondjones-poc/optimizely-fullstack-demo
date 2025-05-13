@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BannerForPlpSegments = ({...props}) => {
+const SegmentationQueryStringBanner = ({...props}) => {
 
     const { componentMessage, discount } = props;
 
@@ -15,7 +15,7 @@ const BannerForPlpSegments = ({...props}) => {
         {discount ?
           <ul className="actions">
             <li>
-              <a href="/news" className="button icon solid fa-file">
+              <a href="/signup" className="button icon solid fa-file">
                 Order now and get a {discount}% discount (passed in via FX)
               </a>
             </li>
@@ -26,4 +26,5 @@ const BannerForPlpSegments = ({...props}) => {
     )
 }
 
-export default BannerForPlpSegments;
+export default SegmentationQueryStringBanner;
+
