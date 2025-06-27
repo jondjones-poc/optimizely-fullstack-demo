@@ -4,6 +4,10 @@ command = "npm run build"
 [[plugins]]
 package = "@netlify/plugin-nextjs"
 
+[functions]
+  external_node_modules = ["sharp"]
+  included_files = ["node_modules/sharp/**/*"]
+
 [[headers]]
 for = "/*"
     [headers.values]
