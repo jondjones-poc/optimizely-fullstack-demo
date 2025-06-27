@@ -12,7 +12,7 @@
     "@babel/core": "^7.23.0",
     "@babel/runtime": "^7.23.1",
     "@contentful/rich-text-html-renderer": "^16.2.0",
-    "@netlify/next": "^1.4.9",
+    "@netlify/next": "1.4.9",
     "@optimizely/js-sdk-logging": "^0.3.1",
     "@optimizely/optimizely-sdk": "^4.10.0",
     "@optimizely/react-sdk": "^2.9.2",
@@ -30,6 +30,7 @@
     "react-dom": "^18.2.0",
     "react-microsoft-clarity": "^1.2.0",
     "sass-loader": "^13.3.2",
+    "sharp": "^0.34.2",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
