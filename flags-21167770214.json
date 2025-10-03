@@ -1,0 +1,599 @@
+Found 6 flag(s) (6 total)
+{
+  "result": "success",
+  "metadata": {
+    "operation": "list_flag",
+    "total_count": 6,
+    "operation_successful": true,
+    "timestamp": "2025-09-22T11:24:07.986Z",
+    "project_id": "21167770214"
+  },
+  "entities": [
+    {
+      "key": "ab_test",
+      "name": "1 Homepage - AB Test",
+      "description": "",
+      "url": "/projects/21167770214/flags/ab_test",
+      "update_url": "/projects/21167770214/flags",
+      "delete_url": "/projects/21167770214/flags/ab_test",
+      "archive_url": "/projects/21167770214/flags/archived",
+      "variable_definitions": {
+        "backgroundcolour": {
+          "key": "backgroundcolour",
+          "description": "",
+          "type": "string",
+          "default_value": "Red",
+          "created_time": "2022-08-10T08:22:45.729909Z",
+          "updated_time": "2022-08-10T08:22:45.729914Z"
+        },
+        "button_text": {
+          "key": "button_text",
+          "description": "",
+          "type": "string",
+          "default_value": "",
+          "created_time": "2022-08-10T08:18:52.120664Z",
+          "updated_time": "2022-08-10T08:46:49.350892Z"
+        },
+        "button_url": {
+          "key": "button_url",
+          "description": "",
+          "type": "string",
+          "default_value": "",
+          "created_time": "2022-09-12T09:16:47.534910Z",
+          "updated_time": "2022-09-12T09:16:47.534915Z"
+        },
+        "component_title": {
+          "key": "component_title",
+          "description": "",
+          "type": "string",
+          "default_value": "Default Title",
+          "created_time": "2022-08-10T08:41:34.922582Z",
+          "updated_time": "2022-08-10T08:41:34.922586Z"
+        }
+      },
+      "environments": {
+        "production": {
+          "key": "production",
+          "name": "Production",
+          "enabled": true,
+          "has_restricted_permissions": true,
+          "priority": 1,
+          "status": "running",
+          "rules_summary": {
+            "a/b": {
+              "keys": [
+                "ab_test_experiment__new_",
+                "android_user",
+                "ab_test_experiment"
+              ]
+            }
+          },
+          "rules_detail": [
+            {
+              "audience_ids": [],
+              "created_time": "2022-08-10T08:29:10.882947Z",
+              "id": 78090,
+              "name": "Experiment",
+              "traffic_allocation": 10000,
+              "created_by_user_email": "do-not-reply@optimizely.com",
+              "layer_experiment_id": 9300000095588,
+              "fetch_results_ui_url": "https://app.optimizely.com/v2/projects/21167770214/results/9300000073159/experiments/9300000095588",
+              "key": "ab_test_experiment",
+              "distribution_mode": "stats_accelerator",
+              "enabled": true,
+              "variation_names": [
+                "Banner 1",
+                "Banner 2",
+                "Banner 3"
+              ],
+              "days_running": 1139,
+              "updated_time": "2025-09-22T11:02:46.862208Z",
+              "primary_metric": "banner_click",
+              "type": "a/b",
+              "status": "running"
+            },
+            {
+              "audience_ids": [
+                21130261831
+              ],
+              "created_time": "2022-08-10T08:37:56.628247Z",
+              "id": 78095,
+              "name": "IOS User",
+              "traffic_allocation": 10000,
+              "created_by_user_email": "someone",
+              "layer_experiment_id": 9300000095594,
+              "fetch_results_ui_url": "https://app.optimizely.com/v2/projects/21167770214/results/9300000073165/experiments/9300000095594",
+              "key": "ab_test_experiment__new_",
+              "distribution_mode": "manual",
+              "enabled": true,
+              "variation_names": [
+                "Banner 1",
+                "Banner 2"
+              ],
+              "days_running": 1139,
+              "updated_time": "2024-07-16T16:02:49.117501Z",
+              "primary_metric": "button_click",
+              "type": "a/b",
+              "status": "running"
+            },
+            {
+              "audience_ids": [
+                21165320327
+              ],
+              "created_time": "2022-08-10T08:39:24.726269Z",
+              "id": 78096,
+              "name": "Android User",
+              "traffic_allocation": 10000,
+              "created_by_user_email": "someone",
+              "layer_experiment_id": 9300000095595,
+              "fetch_results_ui_url": "https://app.optimizely.com/v2/projects/21167770214/results/9300000073166/experiments/9300000095595",
+              "key": "android_user",
+              "distribution_mode": "manual",
+              "enabled": true,
+              "variation_names": [
+                "Banner 1",
+                "Banner 2"
+              ],
+              "days_running": 1139,
+              "updated_time": "2024-07-16T16:02:49.263439Z",
+              "primary_metric": "totalValue",
+              "type": "a/b",
+              "status": "running"
+            }
+          ],
+          "id": 21119332429,
+          "disable_url": "/projects/21167770214/flags/ab_test/environments/production/ruleset/disabled",
+          "created_time": "2022-02-02T16:55:27.000000Z"
+        }
+      },
+      "id": 22513,
+      "urn": "flags.flags.optimizely.com::22513",
+      "archived": false,
+      "outlier_filtering_enabled": false,
+      "project_id": 21167770214,
+      "created_by_user_id": "YtmxO0-nTmqw_GT9_JzlFQ",
+      "created_by_user_email": "jon.jones@optimizely.com",
+      "account_id": 20724770202,
+      "role": "admin",
+      "created_time": "2022-08-10T08:18:26.280616Z",
+      "updated_time": "2025-09-22T11:02:46.403025Z",
+      "revision": 10
+    },
+    {
+      "key": "plp_-_filter_tests",
+      "name": "2 PLP - Algorithms",
+      "description": "",
+      "url": "/projects/21167770214/flags/plp_-_filter_tests",
+      "update_url": "/projects/21167770214/flags",
+      "delete_url": "/projects/21167770214/flags/plp_-_filter_tests",
+      "archive_url": "/projects/21167770214/flags/archived",
+      "variable_definitions": {
+        "category_filter_version": {
+          "key": "category_filter_version",
+          "description": "",
+          "type": "integer",
+          "default_value": "0",
+          "created_time": "2023-08-15T10:27:04.955119Z",
+          "updated_time": "2023-08-15T10:39:04.312912Z"
+        },
+        "component_version": {
+          "key": "component_version",
+          "description": "",
+          "type": "double",
+          "default_value": "1.0",
+          "created_time": "2025-04-11T13:19:29.916874Z",
+          "updated_time": "2025-04-11T13:19:29.916877Z"
+        },
+        "size_filter_version": {
+          "key": "size_filter_version",
+          "description": "",
+          "type": "integer",
+          "default_value": "0",
+          "created_time": "2023-08-15T10:27:51.994365Z",
+          "updated_time": "2023-08-15T10:27:51.994368Z"
+        }
+      },
+      "environments": {
+        "production": {
+          "key": "production",
+          "name": "Production",
+          "enabled": true,
+          "has_restricted_permissions": true,
+          "priority": 1,
+          "status": "running",
+          "rules_summary": {
+            "a/b": {
+              "keys": [
+                "filter_test"
+              ]
+            }
+          },
+          "rules_detail": [
+            {
+              "audience_ids": [
+                26638960407
+              ],
+              "created_time": "2023-08-15T10:41:32.575833Z",
+              "id": 225665,
+              "name": "Filter Test",
+              "traffic_allocation": 10000,
+              "created_by_user_email": "jon.jones@optimizely.com",
+              "layer_experiment_id": 9300000381775,
+              "fetch_results_ui_url": "https://app.optimizely.com/v2/projects/21167770214/results/9300000304401/experiments/9300000381775",
+              "key": "filter_test",
+              "distribution_mode": "stats_accelerator",
+              "enabled": true,
+              "variation_names": [
+                "Variation B",
+                "Variation C",
+                "Variation D"
+              ],
+              "days_running": 769,
+              "updated_time": "2025-09-22T11:02:38.795624Z",
+              "primary_metric": "banner_click",
+              "type": "a/b",
+              "status": "running"
+            }
+          ],
+          "id": 21119332429,
+          "disable_url": "/projects/21167770214/flags/plp_-_filter_tests/environments/production/ruleset/disabled",
+          "created_time": "2022-02-02T16:55:27.000000Z"
+        }
+      },
+      "id": 105689,
+      "urn": "flags.flags.optimizely.com::105689",
+      "archived": false,
+      "outlier_filtering_enabled": false,
+      "project_id": 21167770214,
+      "created_by_user_id": "YtmxO0-nTmqw_GT9_JzlFQ",
+      "created_by_user_email": "jon.jones@optimizely.com",
+      "account_id": 20724770202,
+      "role": "admin",
+      "created_time": "2023-08-15T09:54:14.930875Z",
+      "updated_time": "2025-09-22T11:02:38.640810Z",
+      "revision": 12
+    },
+    {
+      "key": "1_homepage_-_remote_control",
+      "name": "1 Homepage - Remote Control",
+      "description": "",
+      "url": "/projects/21167770214/flags/1_homepage_-_remote_control",
+      "update_url": "/projects/21167770214/flags",
+      "delete_url": "/projects/21167770214/flags/1_homepage_-_remote_control",
+      "archive_url": "/projects/21167770214/flags/archived",
+      "variable_definitions": {
+        "promotionMessage": {
+          "key": "promotionMessage",
+          "description": "",
+          "type": "string",
+          "default_value": "Update content on mobile apps without a code release !!!!",
+          "created_time": "2024-09-12T10:50:01.231429Z",
+          "updated_time": "2024-09-12T11:18:29.431626Z"
+        }
+      },
+      "environments": {
+        "production": {
+          "key": "production",
+          "name": "Production",
+          "enabled": true,
+          "has_restricted_permissions": true,
+          "priority": 1,
+          "status": "running",
+          "rules_summary": {},
+          "rules_detail": [],
+          "id": 21119332429,
+          "disable_url": "/projects/21167770214/flags/1_homepage_-_remote_control/environments/production/ruleset/disabled",
+          "created_time": "2022-02-02T16:55:27.000000Z"
+        }
+      },
+      "id": 273074,
+      "urn": "flags.flags.optimizely.com::273074",
+      "archived": false,
+      "outlier_filtering_enabled": false,
+      "project_id": 21167770214,
+      "created_by_user_id": "jon.jones@optimizely.com",
+      "created_by_user_email": "jon.jones@optimizely.com",
+      "account_id": 20724770202,
+      "role": "admin",
+      "created_time": "2024-09-12T10:36:35.784798Z",
+      "updated_time": "2025-09-18T10:49:36.123235Z",
+      "revision": 6
+    },
+    {
+      "key": "feature_flag",
+      "name": "1 Homepage - Feature Flag",
+      "description": "",
+      "url": "/projects/21167770214/flags/feature_flag",
+      "update_url": "/projects/21167770214/flags",
+      "delete_url": "/projects/21167770214/flags/feature_flag",
+      "archive_url": "/projects/21167770214/flags/archived",
+      "variable_definitions": {
+        "api_url": {
+          "key": "api_url",
+          "description": "",
+          "type": "string",
+          "default_value": "http://www.jondjones.com",
+          "created_time": "2022-06-01T09:47:55.816999Z",
+          "updated_time": "2022-06-01T09:47:55.817003Z"
+        },
+        "buttontext": {
+          "key": "buttontext",
+          "description": "",
+          "type": "string",
+          "default_value": "Click Me",
+          "created_time": "2022-08-08T09:05:19.392286Z",
+          "updated_time": "2022-08-08T09:05:19.392290Z"
+        },
+        "name": {
+          "key": "name",
+          "description": "",
+          "type": "string",
+          "default_value": "This is a dynamic variable being injected",
+          "created_time": "2022-06-01T09:03:54.598365Z",
+          "updated_time": "2022-07-12T10:49:10.568167Z"
+        }
+      },
+      "environments": {
+        "production": {
+          "key": "production",
+          "name": "Production",
+          "enabled": false,
+          "has_restricted_permissions": true,
+          "priority": 1,
+          "status": "paused",
+          "rules_summary": {},
+          "rules_detail": [],
+          "id": 21119332429,
+          "enable_url": "/projects/21167770214/flags/feature_flag/environments/production/ruleset/enabled",
+          "created_time": "2022-02-02T16:55:27.000000Z"
+        }
+      },
+      "id": 13374,
+      "urn": "flags.flags.optimizely.com::13374",
+      "archived": false,
+      "outlier_filtering_enabled": false,
+      "project_id": 21167770214,
+      "created_by_user_id": "YtmxO0-nTmqw_GT9_JzlFQ",
+      "created_by_user_email": "jon.jones@optimizely.com",
+      "account_id": 20724770202,
+      "role": "admin",
+      "created_time": "2022-04-12T10:12:42.430695Z",
+      "updated_time": "2025-09-18T10:47:05.301266Z",
+      "revision": 9
+    },
+    {
+      "key": "odp",
+      "name": "3 Landing - ODP",
+      "description": "From Page",
+      "url": "/projects/21167770214/flags/odp",
+      "update_url": "/projects/21167770214/flags",
+      "delete_url": "/projects/21167770214/flags/odp",
+      "archive_url": "/projects/21167770214/flags/archived",
+      "variable_definitions": {
+        "boolean_variable": {
+          "key": "boolean_variable",
+          "description": "",
+          "type": "boolean",
+          "default_value": "true",
+          "created_time": "2025-07-11T09:04:10.247676Z",
+          "updated_time": "2025-07-11T09:04:10.247678Z"
+        }
+      },
+      "environments": {
+        "production": {
+          "key": "production",
+          "name": "Production",
+          "enabled": true,
+          "has_restricted_permissions": true,
+          "priority": 1,
+          "status": "running",
+          "rules_summary": {
+            "targeted_delivery": {
+              "keys": [
+                "odp_targeted_delivery__poole"
+              ]
+            }
+          },
+          "rules_detail": [
+            {
+              "audience_ids": [
+                22303420815
+              ],
+              "created_time": "2022-10-22T15:56:03.260690Z",
+              "id": 106494,
+              "name": "Known User",
+              "traffic_allocation": 6000,
+              "created_by_user_email": "someone",
+              "layer_experiment_id": 9300000131900,
+              "fetch_results_ui_url": null,
+              "key": "odp_targeted_delivery__poole",
+              "distribution_mode": null,
+              "enabled": true,
+              "variation_names": [
+                "On"
+              ],
+              "days_running": null,
+              "updated_time": "2025-07-11T08:53:12.914596Z",
+              "primary_metric": null,
+              "type": "targeted_delivery",
+              "status": "running"
+            }
+          ],
+          "id": 21119332429,
+          "disable_url": "/projects/21167770214/flags/odp/environments/production/ruleset/disabled",
+          "created_time": "2022-02-02T16:55:27.000000Z"
+        }
+      },
+      "id": 29803,
+      "urn": "flags.flags.optimizely.com::29803",
+      "archived": false,
+      "outlier_filtering_enabled": false,
+      "project_id": 21167770214,
+      "created_by_user_id": "YtmxO0-nTmqw_GT9_JzlFQ",
+      "created_by_user_email": "jon.jones@optimizely.com",
+      "account_id": 20724770202,
+      "role": "admin",
+      "created_time": "2022-10-06T10:37:17.030526Z",
+      "updated_time": "2025-07-11T09:13:33.378783Z",
+      "revision": 17
+    },
+    {
+      "key": "personalisation",
+      "name": "2 PLP - Segments",
+      "description": "",
+      "url": "/projects/21167770214/flags/personalisation",
+      "update_url": "/projects/21167770214/flags",
+      "delete_url": "/projects/21167770214/flags/personalisation",
+      "archive_url": "/projects/21167770214/flags/archived",
+      "variable_definitions": {
+        "component_message": {
+          "key": "component_message",
+          "description": "",
+          "type": "string",
+          "default_value": "",
+          "created_time": "2022-08-25T17:22:55.676588Z",
+          "updated_time": "2022-08-25T17:22:55.676596Z"
+        },
+        "discount_amount": {
+          "key": "discount_amount",
+          "description": "",
+          "type": "integer",
+          "default_value": "0",
+          "created_time": "2022-09-07T12:22:41.661258Z",
+          "updated_time": "2022-09-07T12:22:41.661263Z"
+        }
+      },
+      "environments": {
+        "production": {
+          "key": "production",
+          "name": "Production",
+          "enabled": true,
+          "has_restricted_permissions": true,
+          "priority": 1,
+          "status": "running",
+          "rules_summary": {
+            "targeted_delivery": {
+              "keys": [
+                "personalisation_targeted_delivery",
+                "marketing",
+                "personalisation_targeted_delivery__new___new_"
+              ]
+            }
+          },
+          "rules_detail": [
+            {
+              "audience_ids": [
+                22021450272
+              ],
+              "created_time": "2022-08-16T08:40:35.268383Z",
+              "id": 80464,
+              "name": "Newsletter Campaign Example",
+              "traffic_allocation": 10000,
+              "created_by_user_email": "someone",
+              "layer_experiment_id": 9300000098224,
+              "fetch_results_ui_url": null,
+              "key": "personalisation_targeted_delivery",
+              "distribution_mode": null,
+              "enabled": true,
+              "variation_names": [
+                "Newsletter Promotion"
+              ],
+              "days_running": null,
+              "updated_time": "2025-05-13T10:56:26.234051Z",
+              "primary_metric": null,
+              "type": "targeted_delivery",
+              "status": "running"
+            },
+            {
+              "audience_ids": [
+                6627289182502912
+              ],
+              "created_time": "2023-12-07T10:04:46.735015Z",
+              "id": 269895,
+              "name": " Website Message Example",
+              "traffic_allocation": 10000,
+              "created_by_user_email": "jon.jones@optimizely.com",
+              "layer_experiment_id": 9300000459811,
+              "fetch_results_ui_url": null,
+              "key": "marketing",
+              "distribution_mode": null,
+              "enabled": true,
+              "variation_names": [
+                "Website Promotion"
+              ],
+              "days_running": null,
+              "updated_time": "2025-05-13T10:58:44.335550Z",
+              "primary_metric": null,
+              "type": "targeted_delivery",
+              "status": "running"
+            },
+            {
+              "audience_ids": [
+                30030390195
+              ],
+              "created_time": "2022-08-25T17:27:37.842662Z",
+              "id": 82045,
+              "name": "Returning Customer/Member Example",
+              "traffic_allocation": 10000,
+              "created_by_user_email": "someone",
+              "layer_experiment_id": 9300000101110,
+              "fetch_results_ui_url": null,
+              "key": "personalisation_targeted_delivery__new___new_",
+              "distribution_mode": null,
+              "enabled": true,
+              "variation_names": [
+                "Member Promotion"
+              ],
+              "days_running": null,
+              "updated_time": "2025-05-13T11:01:03.367061Z",
+              "primary_metric": null,
+              "type": "targeted_delivery",
+              "status": "running"
+            }
+          ],
+          "id": 21119332429,
+          "disable_url": "/projects/21167770214/flags/personalisation/environments/production/ruleset/disabled",
+          "created_time": "2022-02-02T16:55:27.000000Z"
+        }
+      },
+      "id": 22970,
+      "urn": "flags.flags.optimizely.com::22970",
+      "archived": false,
+      "outlier_filtering_enabled": false,
+      "project_id": 21167770214,
+      "created_by_user_id": "YtmxO0-nTmqw_GT9_JzlFQ",
+      "created_by_user_email": "jon.jones@optimizely.com",
+      "account_id": 20724770202,
+      "role": "admin",
+      "created_time": "2022-08-16T08:38:48.724748Z",
+      "updated_time": "2025-06-10T12:20:05.969343Z",
+      "revision": 13
+    }
+  ],
+  "_usage_guidance": {
+    "entity_type": "flag",
+    "complexity_note": "Flags with A/B tests require template mode for proper orchestration",
+    "template_mode": {
+      "available": true,
+      "when_needed": "Creating flags with A/B tests, variables, or complex rules",
+      "benefit": "Automatically creates variables, variations, and rulesets"
+    },
+    "documentation": "Call get_entity_documentation('flag') for detailed creation guidance",
+    "next_steps": {
+      "simple_creation": "Use manage_entity_lifecycle(operation='create', entity_type='flag')",
+      "complex_creation": "Use template mode for entities with dependencies - system will auto-detect",
+      "read_docs": "get_entity_documentation(entity_type='flag') for complete workflow understanding"
+    },
+    "critical_reminder": "Creating flags with A/B tests requires understanding template mode orchestration"
+  },
+  "pagination": {
+    "consent_required": false,
+    "has_more": false,
+    "total_count": 6,
+    "total_pages": 1,
+    "current_page": 1,
+    "page_size": 25,
+    "next_page": null,
+    "previous_page": null
+  }
+}
