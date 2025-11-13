@@ -1,8 +1,10 @@
 [build]
-command = "npm run build"
+command = "rm -rf node_modules/.cache && npm run build"
 
 [build.environment]
 NPM_FLAGS = "--platform=linux --arch=x64"
+SHARP_IGNORE_GLOBAL_LIBVIPS = "1"
+NODE_VERSION = "18"
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
